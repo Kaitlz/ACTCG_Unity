@@ -88,11 +88,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_13698439934f4da7872fb3cf232ceeb2_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 9918c5df204dcff4faad019817f26134, type: 3}
+        m_Texture: {fileID: 2800000, guid: f0e1420c2ab2d784d8a9b22dc51eb821, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_1e092127eae64019b35c1f136cfcaf71_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: d137fbad7f1ef14488f533571cb3d70a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 159e77d7719910f4a8ec7850015ee0e3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_2fe1b26a809c4ccfab5505d493f8186a_Texture_1_Texture2D:
@@ -100,11 +100,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_5fb475f0c9f843f0a1764c43a15028a9_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: f58fa09f93744484185442edf86098e1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9f8d5a40662311542b8083e3749287df, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_7b40d4c34f2640eb804dc41ccd19359e_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: db81fe29d7f4d364da369c56f5722009, type: 3}
+        m_Texture: {fileID: 2800000, guid: 868771be4b77bab4bb70979d4b49f98c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_a02cee2edf704fc0b233b50ec6c66963_Texture_1_Texture2D:
@@ -116,7 +116,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_ee1387cc549c4a70823a61eee473a421_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: a13882734cb57764db6ce05768206118, type: 3}
+        m_Texture: {fileID: 2800000, guid: 90bf32fa761781141a765a92253635d4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
@@ -237,9 +237,12 @@ Material:
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
     - _ParallaxHeightBob: 0
-    - _ParallaxHeightHouse: 0.2
+    - _ParallaxHeightGround: 0
+    - _ParallaxHeightHouse: -0.2
+    - _ParallaxHeightSky: -0.25
     - _ParallaxHeightTree01: 0.2
     - _ParallaxHeightTree02: 0.2
+    - _ParallaxHeightTrees: -0.15
     - _RayTracing: 0
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
