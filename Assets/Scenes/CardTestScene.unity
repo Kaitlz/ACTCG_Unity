@@ -4781,31 +4781,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1067844379551072835, guid: ea356b511574d9847bf328bea4139851, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99882525
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1067844379551072835, guid: ea356b511574d9847bf328bea4139851, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.03878004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1067844379551072835, guid: ea356b511574d9847bf328bea4139851, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00025874778
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1067844379551072835, guid: ea356b511574d9847bf328bea4139851, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.029056162
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1067844379551072835, guid: ea356b511574d9847bf328bea4139851, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 4.442
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1067844379551072835, guid: ea356b511574d9847bf328bea4139851, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0.159
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1067844379551072835, guid: ea356b511574d9847bf328bea4139851, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 3.339
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5721948483064883492, guid: ea356b511574d9847bf328bea4139851, type: 3}
       propertyPath: m_Name
@@ -4825,6 +4825,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 2327549009863775316, guid: ea356b511574d9847bf328bea4139851, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 818724292588072155, guid: ea356b511574d9847bf328bea4139851, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: ea356b511574d9847bf328bea4139851, type: 3}
