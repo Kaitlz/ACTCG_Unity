@@ -127,6 +127,26 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _T1:
+        m_Texture: {fileID: 2800000, guid: 159e77d7719910f4a8ec7850015ee0e3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T2:
+        m_Texture: {fileID: 2800000, guid: 9f8d5a40662311542b8083e3749287df, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T3:
+        m_Texture: {fileID: 2800000, guid: f0e1420c2ab2d784d8a9b22dc51eb821, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T4:
+        m_Texture: {fileID: 2800000, guid: 90bf32fa761781141a765a92253635d4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T5:
+        m_Texture: {fileID: 2800000, guid: 868771be4b77bab4bb70979d4b49f98c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _T_01:
         m_Texture: {fileID: 2800000, guid: 159e77d7719910f4a8ec7850015ee0e3, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -298,6 +318,21 @@ Material:
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
     - _SurfaceType: 0
+    - _T1_ParallaxIntensityX: 0
+    - _T1_ParallaxIntensityY: 0
+    - _T1_Scale: 1.15
+    - _T2_ParallaxIntensityX: -0.07
+    - _T2_ParallaxIntensityY: -0.035
+    - _T2_Scale: 1.15
+    - _T3_ParallaxIntensityX: -0.15
+    - _T3_ParallaxIntensityY: -0.085
+    - _T3_Scale: 2.53
+    - _T4_ParallaxIntensityX: 0
+    - _T4_ParallaxIntensityY: 0
+    - _T4_Scale: 0.51
+    - _T5_ParallaxIntensityX: -0.2
+    - _T5_ParallaxIntensityY: -0.08
+    - _T5_Scale: 0.87
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
@@ -336,6 +371,11 @@ Material:
     - _OffsetT4: {r: 0.34, g: 0.423, b: 0, a: 0}
     - _OffsetT5: {r: 0.4, g: 0, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _T1_Offset: {r: -0.06, g: 0.03, b: 0, a: 0}
+    - _T2_Offset: {r: -0.62, g: -0.39, b: 0, a: 0}
+    - _T3_Offset: {r: 0.45, g: -1.03, b: 0, a: 0}
+    - _T4_Offset: {r: 0.34, g: 0.423, b: 0, a: 0}
+    - _T5_Offset: {r: 0.37, g: -0.05, b: 0, a: 0}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}

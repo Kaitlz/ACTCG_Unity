@@ -115,6 +115,26 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _T1:
+        m_Texture: {fileID: 2800000, guid: 0d92ea944da1b58478b37144f3176bdf, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T2:
+        m_Texture: {fileID: 2800000, guid: a5028c7382896784ebc3cf3bf42b899e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T3:
+        m_Texture: {fileID: 2800000, guid: c527d2d3310b1d84bb9ee18c426a04dc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T5:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _T_01:
         m_Texture: {fileID: 2800000, guid: 0d92ea944da1b58478b37144f3176bdf, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -249,8 +269,8 @@ Material:
     - _ParallaxHeightHouse: -0.13
     - _ParallaxHeightSky: 0
     - _ParallaxHeightT1: 0
-    - _ParallaxHeightT2: -0.05
-    - _ParallaxHeightT3: -0.15
+    - _ParallaxHeightT2: -0.3
+    - _ParallaxHeightT3: -0.5
     - _ParallaxHeightT4: 0
     - _ParallaxHeightT5: 0
     - _ParallaxHeightTrees: -0.05
@@ -284,6 +304,21 @@ Material:
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
     - _SurfaceType: 0
+    - _T1_ParallaxIntensityX: 0
+    - _T1_ParallaxIntensityY: 0
+    - _T1_Scale: 1.39
+    - _T2_ParallaxIntensityX: -0.05
+    - _T2_ParallaxIntensityY: -0.02
+    - _T2_Scale: 0.71
+    - _T3_ParallaxIntensityX: -0.15
+    - _T3_ParallaxIntensityY: -0.15
+    - _T3_Scale: 0.39
+    - _T4_ParallaxIntensityX: 0
+    - _T4_ParallaxIntensityY: 0
+    - _T4_Scale: 0
+    - _T5_ParallaxIntensityX: 0
+    - _T5_ParallaxIntensityY: 0
+    - _T5_Scale: 0
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
@@ -322,6 +357,11 @@ Material:
     - _OffsetT4: {r: 0.34, g: 0.423, b: 0, a: 0}
     - _OffsetT5: {r: 0.4, g: 0, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _T1_Offset: {r: -0.38, g: -0.18, b: 0, a: 0}
+    - _T2_Offset: {r: 0.15, g: 0.07, b: 0, a: 0}
+    - _T3_Offset: {r: 0.43, g: 0.31, b: 0, a: 0}
+    - _T4_Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _T5_Offset: {r: 0, g: 0, b: 0, a: 0}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
