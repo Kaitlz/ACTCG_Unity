@@ -320,18 +320,18 @@ Material:
     - _SurfaceType: 0
     - _T1_ParallaxIntensityX: 0
     - _T1_ParallaxIntensityY: 0
-    - _T1_Scale: 1.15
-    - _T2_ParallaxIntensityX: -0.07
-    - _T2_ParallaxIntensityY: -0.035
+    - _T1_Scale: 0.86
+    - _T2_ParallaxIntensityX: -0.1
+    - _T2_ParallaxIntensityY: -0.07
     - _T2_Scale: 1.15
-    - _T3_ParallaxIntensityX: -0.15
+    - _T3_ParallaxIntensityX: -0.3
     - _T3_ParallaxIntensityY: -0.085
     - _T3_Scale: 2.53
     - _T4_ParallaxIntensityX: 0
-    - _T4_ParallaxIntensityY: 0
+    - _T4_ParallaxIntensityY: -0.05
     - _T4_Scale: 0.51
-    - _T5_ParallaxIntensityX: -0.2
-    - _T5_ParallaxIntensityY: -0.08
+    - _T5_ParallaxIntensityX: -0.5
+    - _T5_ParallaxIntensityY: -0.035
     - _T5_Scale: 0.87
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
@@ -371,11 +371,11 @@ Material:
     - _OffsetT4: {r: 0.34, g: 0.423, b: 0, a: 0}
     - _OffsetT5: {r: 0.4, g: 0, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _T1_Offset: {r: -0.06, g: 0.03, b: 0, a: 0}
-    - _T2_Offset: {r: -0.62, g: -0.39, b: 0, a: 0}
-    - _T3_Offset: {r: 0.45, g: -1.03, b: 0, a: 0}
+    - _T1_Offset: {r: 0.17, g: 0.17, b: 0, a: 0}
+    - _T2_Offset: {r: -0.62, g: -0.36, b: 0, a: 0}
+    - _T3_Offset: {r: 0.41, g: -1.03, b: 0, a: 0}
     - _T4_Offset: {r: 0.34, g: 0.423, b: 0, a: 0}
-    - _T5_Offset: {r: 0.37, g: -0.05, b: 0, a: 0}
+    - _T5_Offset: {r: 0.19, g: -0.06, b: 0, a: 0}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
