@@ -5918,6 +5918,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card
       objectReference: {fileID: 0}
+    - target: {fileID: 8851113715543147954, guid: ea356b511574d9847bf328bea4139851, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 4024179818253575016, guid: 89627f1a99ee46b4d8e5c90aaa13f367, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6223,6 +6227,10 @@ PrefabInstance:
     - target: {fileID: 7027376162669414092, guid: d201179b46250ec40be81a19eb0004d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671832827116650757, guid: d201179b46250ec40be81a19eb0004d1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
