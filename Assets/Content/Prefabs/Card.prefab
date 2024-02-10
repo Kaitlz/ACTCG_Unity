@@ -132,7 +132,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818724292588072155}
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -0.009000295}
+  m_LocalPosition: {x: 0, y: 0, z: -0.009}
   m_LocalScale: {x: 0.872832, y: 0.87283176, z: 0.87283176}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -140,7 +140,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.49314952, y: 0.089901336}
+  m_AnchoredPosition: {x: -0.005, y: 0.1}
   m_SizeDelta: {x: 1.91, y: 0.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8851113715543147954
@@ -239,10 +239,10 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 4.19
+  m_characterSpacing: 7.68
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -491,8 +491,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278519562
-  m_fontColor: {r: 0.03773582, g: 0.027456367, b: 0.01904591, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2414,7 +2414,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9d1fadeab53febd44998b870bbc7a562, type: 2}
     - target: {fileID: 919132149155446097, guid: d8a4fcbecbe996c47aaf625a024b728a, type: 3}
       propertyPath: m_Name
-      value: SM_CardDescBox_01
+      value: SM_CardDescBox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2558,7 +2558,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1b6cb44a1f1d96e4b989cf7fcf0f47f7, type: 2}
     - target: {fileID: 919132149155446097, guid: ec4ea44ddb9b1e643af57008b7dce3b1, type: 3}
       propertyPath: m_Name
-      value: SM_CardName_01
+      value: SM_CardName
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

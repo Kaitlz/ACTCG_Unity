@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8d9e8c4c39ef5489d7b888d4c7edfd, type: 3}
+  m_Name: Elmer
+  m_EditorClassIdentifier: 
+  LightColor: {r: 0.9490196, g: 0.972549, b: 0.45882353, a: 1}
+  MediumColor: {r: 0.8039216, g: 0.9411765, b: 0.23137255, a: 1}
+  DarkColor: {r: 0.1764706, g: 0.65882355, b: 0.05490196, a: 1}
+  MainImage: {fileID: 0}
+  BackgroundPattern: {fileID: 2100000, guid: 993c149527190644c934e097503fa4dc, type: 2}
+  Name: Elmer
+  TypeName: Villager
+  TypeIcon: {fileID: 2800000, guid: 682d70344ad7331489bf6c19040b5264, type: 3}
+  PersonalityIcon: {fileID: 2800000, guid: e0ec06510aacbf24d9b3951ee4e9a706, type: 3}
+  StarSignIcon: {fileID: 2800000, guid: 2dbe0b4509fdf9e4f8a1c9e3d70050ba, type: 3}
+  DOB: 10/05
+  HappinessPoints: 02
+  Description: '[TEMP DESCRIPTION] Elmer is a horse.'

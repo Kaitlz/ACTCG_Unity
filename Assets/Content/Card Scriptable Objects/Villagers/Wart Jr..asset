@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8d9e8c4c39ef5489d7b888d4c7edfd, type: 3}
+  m_Name: Wart Jr.
+  m_EditorClassIdentifier: 
+  LightColor: {r: 0.972549, g: 0.76862746, b: 0.45882353, a: 1}
+  MediumColor: {r: 0.93333334, g: 0.6039216, b: 0.22745098, a: 1}
+  DarkColor: {r: 0.7529412, g: 0.3254902, b: 0.0627451, a: 1}
+  MainImage: {fileID: 0}
+  BackgroundPattern: {fileID: 2100000, guid: 993c149527190644c934e097503fa4dc, type: 2}
+  Name: Wart Jr.
+  TypeName: Villager
+  TypeIcon: {fileID: 2800000, guid: d928a1939ef12ef4cbdd83d5033a708c, type: 3}
+  PersonalityIcon: {fileID: 2800000, guid: 724846531ae772b4696d1540123c2645, type: 3}
+  StarSignIcon: {fileID: 2800000, guid: d6d2cd7472a321d44a97880723ee02f9, type: 3}
+  DOB: 08/21
+  HappinessPoints: 00
+  Description: '[TEMP DESCRIPTION] Wart Jr. is a frog.'
