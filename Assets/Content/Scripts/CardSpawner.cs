@@ -8,17 +8,15 @@ public class CardSpawner : MonoBehaviour
     // The GameObject to instantiate.
     public GameObject emptyCard;
 
-    // TODO: maybe like make a list of these that I can set in the editor?? how would this play with the various types--can I make a list of type CardDataSOs?
     // An instance of the ScriptableObject defined above.
     public VillagerDataSO[] villagerValues;
 
     void Start()
     {
-        SpawnEntities();
+        SpawnCards();
     }
 
-    // TODO: rename this to SpawnCard or something
-    void SpawnEntities()
+    void SpawnCards()
     {
         // Creates an instance of the prefab at the current spawn point.
         GameObject[] CardLocations = GameObject.FindGameObjectsWithTag("CardLocation");
@@ -28,7 +26,7 @@ public class CardSpawner : MonoBehaviour
             GameObject newCard = Instantiate(emptyCard, CardLocations[i].transform.position, CardLocations[i].transform.rotation);
             // TODO: change the name of the spawned object so multiple cards don't compete for the same name
 
-            int vilValIndex = i < villagerValues.Length ? i : 0;
+            int vilValIndex = i < villagerValues.Length ? i : Random.Range(0, villagerValues.Length - 1);
 
             // Sets the name of the instantiated entity to be the string defined in the ScriptableObject and then appends it with a unique number. 
             newCard.transform.Find("Name").GetComponent<TextMeshPro>().SetText(villagerValues[vilValIndex].Name);

@@ -19,7 +19,7 @@ MonoBehaviour:
   BackgroundPattern: {fileID: 2100000, guid: 993c149527190644c934e097503fa4dc, type: 2}
   Name: Pietro
   TypeName: Villager
-  TypeIcon: {fileID: 0}
+  TypeIcon: {fileID: 2800000, guid: e9d0d78b198044f4ba2b348ac6eea833, type: 3}
   PersonalityIcon: {fileID: 2800000, guid: a2e143015c68e2d42b22f00f533fc3ae, type: 3}
   StarSignIcon: {fileID: 2800000, guid: 055115639dfaeba45863e23d476726a6, type: 3}
   DOB: 04/19
