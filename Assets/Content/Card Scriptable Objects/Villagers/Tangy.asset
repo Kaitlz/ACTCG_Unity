@@ -20,7 +20,7 @@ MonoBehaviour:
   Name: Tangy
   TypeName: Villager
   TypeIcon: {fileID: 2800000, guid: f60104481e0675147947cab3b169f729, type: 3}
-  PersonalityIcon: {fileID: 2800000, guid: 0cd24c774d00dc847b0d4356fb9f12a3, type: 3}
+  PersonalityIcon: {fileID: 2800000, guid: f3b1999884ef0794ab415720ccabd03d, type: 3}
   StarSignIcon: {fileID: 2800000, guid: cf01bf9864ce01540a4faa69f8879350, type: 3}
   DOB: 06/17
   HappinessPoints: 02

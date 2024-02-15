@@ -20,7 +20,7 @@ MonoBehaviour:
   Name: Gloria
   TypeName: Duck
   TypeIcon: {fileID: 2800000, guid: bf7d6d9901e72224db4db2169574c795, type: 3}
-  PersonalityIcon: {fileID: 2800000, guid: ff5ff141afe730f4780ae5989ca44e19, type: 3}
+  PersonalityIcon: {fileID: 2800000, guid: 5cbc65be7028f8e4c99133000631c4f8, type: 3}
   StarSignIcon: {fileID: 2800000, guid: d6d2cd7472a321d44a97880723ee02f9, type: 3}
   DOB: 08/12
   HappinessPoints: 01

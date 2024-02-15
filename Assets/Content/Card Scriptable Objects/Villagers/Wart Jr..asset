@@ -20,7 +20,7 @@ MonoBehaviour:
   Name: Wart Jr.
   TypeName: Villager
   TypeIcon: {fileID: 2800000, guid: d928a1939ef12ef4cbdd83d5033a708c, type: 3}
-  PersonalityIcon: {fileID: 2800000, guid: 724846531ae772b4696d1540123c2645, type: 3}
+  PersonalityIcon: {fileID: 2800000, guid: 593764c1d36c7394eb74421f2f3c51db, type: 3}
   StarSignIcon: {fileID: 2800000, guid: d6d2cd7472a321d44a97880723ee02f9, type: 3}
   DOB: 08/21
   HappinessPoints: 00

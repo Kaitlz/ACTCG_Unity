@@ -20,7 +20,7 @@ MonoBehaviour:
   Name: Coco
   TypeName: Villager
   TypeIcon: {fileID: 2800000, guid: a35a6daaffd836b4a9912296c782380e, type: 3}
-  PersonalityIcon: {fileID: 2800000, guid: 3ab0f90001bd2a34bb33e890e30a0b68, type: 3}
+  PersonalityIcon: {fileID: 2800000, guid: 5e0412dcab7e6b347b6ad9ec2e1f599f, type: 3}
   StarSignIcon: {fileID: 2800000, guid: 69fe3bbb103805a438a79e333c9c469b, type: 3}
   DOB: 03/01
   HappinessPoints: 01

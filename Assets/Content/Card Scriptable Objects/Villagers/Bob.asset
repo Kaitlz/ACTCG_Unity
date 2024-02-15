@@ -20,7 +20,7 @@ MonoBehaviour:
   Name: Bob
   TypeName: Villager
   TypeIcon: {fileID: 2800000, guid: f60104481e0675147947cab3b169f729, type: 3}
-  PersonalityIcon: {fileID: 2800000, guid: e0ec06510aacbf24d9b3951ee4e9a706, type: 3}
+  PersonalityIcon: {fileID: 2800000, guid: b5fbb1f2160a44644b263facbbdb8249, type: 3}
   StarSignIcon: {fileID: 2800000, guid: 6d9471c3aa3fce94ea6703bc6fb2689b, type: 3}
   DOB: 01/01
   HappinessPoints: 01

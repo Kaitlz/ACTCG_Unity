@@ -20,7 +20,7 @@ MonoBehaviour:
   Name: Ankha
   TypeName: Villager
   TypeIcon: {fileID: 2800000, guid: f60104481e0675147947cab3b169f729, type: 3}
-  PersonalityIcon: {fileID: 2800000, guid: ff5ff141afe730f4780ae5989ca44e19, type: 3}
+  PersonalityIcon: {fileID: 2800000, guid: 5cbc65be7028f8e4c99133000631c4f8, type: 3}
   StarSignIcon: {fileID: 2800000, guid: 80521b1b5f3e9fd43977039b82237db4, type: 3}
   DOB: 09/22
   HappinessPoints: 00

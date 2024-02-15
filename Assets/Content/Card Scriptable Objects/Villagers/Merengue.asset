@@ -15,12 +15,12 @@ MonoBehaviour:
   LightColor: {r: 0.972549, g: 0.45882353, b: 0.7137255, a: 1}
   MediumColor: {r: 0.93333334, g: 0.22745098, b: 0.49803922, a: 1}
   DarkColor: {r: 0.65882355, g: 0.05490196, b: 0.18431373, a: 1}
-  MainImage: {fileID: 0}
+  MainImage: {fileID: 2100000, guid: e38ac5686187c9e438535a2365f525b3, type: 2}
   BackgroundPattern: {fileID: 2100000, guid: 993c149527190644c934e097503fa4dc, type: 2}
   Name: Merengue
   TypeName: Villager
   TypeIcon: {fileID: 2800000, guid: a476d9e155cb99e41851e2ee8cf8f59a, type: 3}
-  PersonalityIcon: {fileID: 2800000, guid: 3ab0f90001bd2a34bb33e890e30a0b68, type: 3}
+  PersonalityIcon: {fileID: 2800000, guid: 5e0412dcab7e6b347b6ad9ec2e1f599f, type: 3}
   StarSignIcon: {fileID: 2800000, guid: 69fe3bbb103805a438a79e333c9c469b, type: 3}
   DOB: 03/19
   HappinessPoints: 02

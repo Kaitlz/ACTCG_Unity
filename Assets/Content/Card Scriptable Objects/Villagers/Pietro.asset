@@ -20,7 +20,7 @@ MonoBehaviour:
   Name: Pietro
   TypeName: Villager
   TypeIcon: {fileID: 2800000, guid: e9d0d78b198044f4ba2b348ac6eea833, type: 3}
-  PersonalityIcon: {fileID: 2800000, guid: a2e143015c68e2d42b22f00f533fc3ae, type: 3}
+  PersonalityIcon: {fileID: 2800000, guid: b14fa780ebd7f094ab20553cc9f5753c, type: 3}
   StarSignIcon: {fileID: 2800000, guid: 055115639dfaeba45863e23d476726a6, type: 3}
   DOB: 04/19
   HappinessPoints: 02
