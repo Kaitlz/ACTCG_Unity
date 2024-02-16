@@ -23,5 +23,5 @@ MonoBehaviour:
   PersonalityIcon: {fileID: 2800000, guid: 5e0412dcab7e6b347b6ad9ec2e1f599f, type: 3}
   StarSignIcon: {fileID: 2800000, guid: d6d2cd7472a321d44a97880723ee02f9, type: 3}
   DOB: 08/05
-  HappinessPoints: 02
+  HappinessPoints: 2
   Description: '[TEMP DESCRIPTION] Poppy is a squirrel.'

@@ -23,5 +23,5 @@ MonoBehaviour:
   PersonalityIcon: {fileID: 2800000, guid: 5e0412dcab7e6b347b6ad9ec2e1f599f, type: 3}
   StarSignIcon: {fileID: 2800000, guid: 69fe3bbb103805a438a79e333c9c469b, type: 3}
   DOB: 03/19
-  HappinessPoints: 02
+  HappinessPoints: 2
   Description: '[TEMP DESCRIPTION] Merengue is a rhino.'

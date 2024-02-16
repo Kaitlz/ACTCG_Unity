@@ -68,7 +68,9 @@ public class CardSpawner : MonoBehaviour
 
             Transform Happiness = newCard.transform.Find("Stats/Circle_TopRight_Happiness_Fruit/Happiness");
             Happiness.GetComponent<TextMeshPro>().SetText(villagerValues[vilValIndex].HappinessPoints);
-            Happiness.GetComponent<MeshRenderer>().material.SetColor("_FaceColor", villagerValues[vilValIndex].DarkColor);
+            //Happiness.GetComponent<MeshRenderer>().material.SetColor("_FaceColor", villagerValues[vilValIndex].DarkColor);
+
+            newCard.transform.Find("Stats/Circle_TopRight_Happiness_Fruit/Heart").GetComponent<MeshRenderer>().material.SetColor("_UnlitColor", villagerValues[vilValIndex].DarkColor);
 
             newCard.transform.Find("Description").GetComponent<TextMeshPro>().SetText(villagerValues[vilValIndex].Description);
 
