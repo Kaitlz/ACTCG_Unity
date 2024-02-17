@@ -22,6 +22,7 @@ MonoBehaviour:
   TypeIcon: {fileID: 2800000, guid: 058b9ad3a3ab57e48b899a3d9211268c, type: 3}
   PersonalityIcon: {fileID: 2800000, guid: b14fa780ebd7f094ab20553cc9f5753c, type: 3}
   StarSignIcon: {fileID: 2800000, guid: d6d2cd7472a321d44a97880723ee02f9, type: 3}
+  GenderIcon: {fileID: 2800000, guid: ec28ebd543641fd4aa4ed54287bc93b8, type: 3}
   DOB: 08/20
   HappinessPoints: 1
   Description: '[TEMP DESCRIPTION] Lopez is a deer.'

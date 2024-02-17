@@ -7,6 +7,7 @@ public class VillagerDataSO : CardDataSO
 {
     public Texture PersonalityIcon;
     public Texture StarSignIcon;
+    public Texture GenderIcon;
     public string DOB;
     public string HappinessPoints;
     public string Description;
