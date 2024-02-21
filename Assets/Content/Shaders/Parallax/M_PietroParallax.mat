@@ -322,9 +322,9 @@ Material:
     - _T4_ParallaxIntensityX: 0
     - _T4_ParallaxIntensityY: 0
     - _T4_Scale: 0.79
-    - _T5_ParallaxIntensityX: -0.2
-    - _T5_ParallaxIntensityY: -0.2
-    - _T5_Scale: 0.46
+    - _T5_ParallaxIntensityX: -0.25
+    - _T5_ParallaxIntensityY: -0.31
+    - _T5_Scale: 0.51
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
@@ -367,7 +367,7 @@ Material:
     - _T2_Offset: {r: -0.61, g: -1.28, b: 0, a: 0}
     - _T3_Offset: {r: -1.65, g: -0.84, b: 0, a: 0}
     - _T4_Offset: {r: 0.03, g: 0.14, b: 0, a: 0}
-    - _T5_Offset: {r: 0.21, g: 0.33, b: 0, a: 0}
+    - _T5_Offset: {r: 0.2, g: 0.22, b: 0, a: 0}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
