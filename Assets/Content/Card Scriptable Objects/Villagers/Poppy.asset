@@ -15,7 +15,7 @@ MonoBehaviour:
   LightColor: {r: 0.972549, g: 0.45882353, b: 0.7137255, a: 1}
   MediumColor: {r: 0.93333334, g: 0.22745098, b: 0.49803922, a: 1}
   DarkColor: {r: 0.65882355, g: 0.05490196, b: 0.18431373, a: 1}
-  MainImage: {fileID: 0}
+  MainImage: {fileID: 2100000, guid: 400e628d89f40bd41a76449c7ce5da97, type: 2}
   BackgroundPattern: {fileID: 2100000, guid: 993c149527190644c934e097503fa4dc, type: 2}
   Name: Poppy
   TypeName: Villager
