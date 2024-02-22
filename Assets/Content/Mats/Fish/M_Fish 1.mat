@@ -23,8 +23,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Fish
-  m_Shader: {fileID: -6465566751694194690, guid: 66b6ddb31c779424d8efd3dbd97760f6, type: 3}
+  m_Name: M_Fish 1
+  m_Shader: {fileID: -6465566751694194690, guid: f59821afd4d819c4eaaad54e5a1adbc2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -274,7 +274,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.16180135, g: 0.18604486, b: 0.2830189, a: 1}
+    - _Color: {r: 0.09812209, g: 0.2548634, b: 0.5943396, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
