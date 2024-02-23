@@ -204,6 +204,10 @@ public class CardSpawner : MonoBehaviour
                 // Card Pattern
                 patternFull.enabled = true;
                 patternFull.material.SetTexture("_UnlitColorMap", fruit.BackgroundPattern);
+
+                // Top Bar
+                cardBarTop.enabled = true;
+                typeTop.enabled = true;
             }
 
             // Solid Background
