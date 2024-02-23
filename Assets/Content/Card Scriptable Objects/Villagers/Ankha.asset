@@ -16,7 +16,8 @@ MonoBehaviour:
   MediumColor: {r: 0.93333334, g: 0.6039216, b: 0.22745098, a: 1}
   DarkColor: {r: 0.7529412, g: 0.3254902, b: 0.0627451, a: 1}
   MainImage: {fileID: 2100000, guid: 3a29f53a25e602c428c0a43d7886f5ce, type: 2}
-  BackgroundPattern: {fileID: -876546973899608171, guid: c7611295a4bf33546bbc14d65e669129, type: 3}
+  BackgroundMaterial: {fileID: 2100000, guid: 9d1fadeab53febd44998b870bbc7a562, type: 2}
+  BackgroundPattern: {fileID: 2800000, guid: 31b6d37b6b7aa2b43bc108ef80cffd0f, type: 3}
   Name: Ankha
   TypeName: Villager
   TypeIcon: {fileID: 2800000, guid: 02baea670fe4b7349b953aefa5f2653c, type: 3}

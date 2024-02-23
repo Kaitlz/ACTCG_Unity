@@ -16,7 +16,8 @@ MonoBehaviour:
   MediumColor: {r: 0.8039216, g: 0.9411765, b: 0.23137255, a: 1}
   DarkColor: {r: 0.1764706, g: 0.65882355, b: 0.05490196, a: 1}
   MainImage: {fileID: 0}
-  BackgroundPattern: {fileID: 2100000, guid: 993c149527190644c934e097503fa4dc, type: 2}
+  BackgroundMaterial: {fileID: 2100000, guid: 9d1fadeab53febd44998b870bbc7a562, type: 2}
+  BackgroundPattern: {fileID: 2800000, guid: 31b6d37b6b7aa2b43bc108ef80cffd0f, type: 3}
   Name: Elmer
   TypeName: Villager
   TypeIcon: {fileID: 2800000, guid: 048b1becb5d8fb441a9787c7025cfa19, type: 3}

@@ -34,16 +34,18 @@ public class CardSpawner : MonoBehaviour
             MeshRenderer personality = newCard.transform.Find("SM_CardBar_Middle/Personality").GetComponent<MeshRenderer>();
             MeshRenderer starSign = newCard.transform.Find("SM_CardName/BottomInfo/Star Sign").GetComponent<MeshRenderer>();
             MeshRenderer gender = newCard.transform.Find("SM_CardName/BottomInfo/Gender").GetComponent<MeshRenderer>();
-            MeshRenderer heart = newCard.transform.Find("Stats/Circle_TopRight_Happiness_Fruit/Heart").GetComponent<MeshRenderer>();
+            MeshRenderer heart = newCard.transform.Find("Stats/Circle_TopLeft_Happiness/Heart").GetComponent<MeshRenderer>();
             MeshRenderer descBox = newCard.transform.Find("SM_CardDescBox_Bottom").GetComponent<MeshRenderer>();
             MeshRenderer cardBarTop = newCard.transform.Find("SM_CardBar_Top").GetComponent<MeshRenderer>();
             MeshRenderer cardBarMiddle = newCard.transform.Find("SM_CardBar_Middle").GetComponent<MeshRenderer>();
             MeshRenderer fruitRender = newCard.transform.Find("FruitRender").GetComponent<MeshRenderer>();
+            MeshRenderer toolRender = newCard.transform.Find("ToolRender").GetComponent<MeshRenderer>();
             MeshRenderer typeIcon = newCard.transform.Find("Stats/Circle_TopLeft_Type/Type").GetComponent<MeshRenderer>();
-            MeshRenderer cardPattern = newCard.transform.Find("CardPattern").GetComponent<MeshRenderer>();
+            MeshRenderer patternFull = newCard.transform.Find("CardPattern").GetComponent<MeshRenderer>();
+            MeshRenderer circleHappiness = newCard.transform.Find("Stats/Circle_TopLeft_Happiness").GetComponent<MeshRenderer>();
 
             TextMeshPro dob = newCard.transform.Find("SM_CardName/BottomInfo/DOB").GetComponent<TextMeshPro>();
-            TextMeshPro happiness = newCard.transform.Find("Stats/Circle_TopRight_Happiness_Fruit/Happiness").GetComponent<TextMeshPro>();
+            TextMeshPro happiness = newCard.transform.Find("Stats/Circle_TopLeft_Happiness/Happiness").GetComponent<TextMeshPro>();
             TextMeshPro description = newCard.transform.Find("SM_CardDescBox_Bottom/Description").GetComponent<TextMeshPro>();
             TextMeshPro typeTop = newCard.transform.Find("SM_CardBar_Top/Type").GetComponent<TextMeshPro>();
             TextMeshPro typeMiddle = newCard.transform.Find("SM_CardBar_Middle/Type").GetComponent<TextMeshPro>();
@@ -59,10 +61,10 @@ public class CardSpawner : MonoBehaviour
                 cardBarTop.enabled = false;
                 typeTop.enabled = false;
                 fruitRender.enabled = false;
-                cardPattern.enabled = false;
+                toolRender.enabled = false;
+                patternFull.enabled = false;
 
                 // Main Image
-                // TODO: dupe this for special NPCs
                 illustration.enabled = true;
                 illustration.material = villager.MainImage;
 
@@ -83,6 +85,7 @@ public class CardSpawner : MonoBehaviour
                 dob.SetText(villager.DOB);
 
                 // Happiness Points
+                circleHappiness.enabled = true;
                 happiness.enabled = true;
                 happiness.SetText(villager.HappinessPoints);
 
@@ -90,7 +93,6 @@ public class CardSpawner : MonoBehaviour
                 heart.material.SetColor("_UnlitColor", villager.DarkColor);
 
                 // Description
-                // TODO: this will likely need to be duped for special NPCs and tools
                 description.enabled = true;
                 description.SetText(villager.Description);
 
@@ -98,6 +100,78 @@ public class CardSpawner : MonoBehaviour
                 descBox.material.SetColor("_TopColor", villager.DarkColor);
                 descBox.material.SetColor("_BottomColor", villager.MediumColor);
                 descBox.material.SetColor("_BackgroundColor", villager.LightColor);
+                descBox.material.SetTexture("_Texture", villager.BackgroundPattern);
+            }
+            else if (cardValues[index] is SpecialNPCDataSO)
+            {
+                SpecialNPCDataSO npc = (cardValues[index] as SpecialNPCDataSO);
+
+                // Disable Unnecessary Items
+                cardBarTop.enabled = false;
+                typeTop.enabled = false;
+                fruitRender.enabled = false;
+                toolRender.enabled = false;
+                patternFull.enabled = false;
+                personality.enabled = false;
+                circleHappiness.enabled = false;
+                heart.enabled = false;
+                happiness.enabled = false;
+
+                // Main Image
+                illustration.enabled = true;
+                illustration.material = npc.MainImage;
+
+                // Star Sign
+                starSign.enabled = true;
+                starSign.material.SetTexture("_UnlitColorMap", npc.StarSignIcon);
+
+                // Gender
+                gender.enabled = true;
+                gender.material.SetTexture("_UnlitColorMap", npc.GenderIcon);
+
+                // Date of Birth
+                dob.enabled = true;
+                dob.SetText(npc.DOB);
+
+                // Description
+                description.enabled = true;
+                description.SetText(npc.Description);
+
+                descBox.enabled = true;
+                descBox.material.SetColor("_TopColor", npc.DarkColor);
+                descBox.material.SetColor("_BottomColor", npc.MediumColor);
+                descBox.material.SetColor("_BackgroundColor", npc.LightColor);
+                descBox.material.SetTexture("_Texture", npc.BackgroundPattern);
+            }
+            else if (cardValues[index] is ToolDataSO)
+            {
+                ToolDataSO tool = (cardValues[index] as ToolDataSO);
+
+                // Disable Unnecessary Items
+                cardBarTop.enabled = false;
+                typeTop.enabled = false;
+                fruitRender.enabled = false;
+                illustration.enabled = false;
+                personality.enabled = false;
+                starSign.enabled = false;
+                gender.enabled = false;
+                dob.enabled = false;
+                descBox.enabled = false;
+                circleHappiness.enabled = false;
+                heart.enabled = false;
+                happiness.enabled = false;
+
+                // Description
+                description.enabled = true;
+                description.SetText(tool.Description);
+
+                // Fruit Render
+                toolRender.enabled = true;
+                toolRender.material.SetTexture("_UnlitColorMap", tool.ToolRender);
+
+                // Card Pattern
+                patternFull.enabled = true;
+                patternFull.material.SetTexture("_UnlitColorMap", tool.BackgroundPattern);
             }
             else if (cardValues[index] is FruitDataSO)
             {
@@ -113,8 +187,10 @@ public class CardSpawner : MonoBehaviour
                 descBox.enabled = false;
                 cardBarMiddle.enabled = false;
                 typeMiddle.enabled = false;
+                toolRender.enabled = false;
 
                 // Happiness Points
+                circleHappiness.enabled = true;
                 happiness.enabled = true;
                 happiness.SetText(fruit.HappinessPoints);
 
@@ -126,8 +202,8 @@ public class CardSpawner : MonoBehaviour
                 fruitRender.material.SetTexture("_UnlitColorMap", fruit.FruitRender);
 
                 // Card Pattern
-                // TODO: actually set the texture for this vs tools
-                cardPattern.enabled = true;
+                patternFull.enabled = true;
+                patternFull.material.SetTexture("_UnlitColorMap", fruit.BackgroundPattern);
             }
 
             // Solid Background

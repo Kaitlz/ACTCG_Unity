@@ -8,7 +8,8 @@ public class CardDataSO : ScriptableObject
     public Color MediumColor;
     public Color DarkColor;
     public Material MainImage;
-    public Material BackgroundPattern;
+    public Material BackgroundMaterial;
+    public Texture2D BackgroundPattern;
     public string Name;
     public string TypeName;
     public Texture2D TypeIcon;
