@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c31ac42c5d4a2384d925fd087d3b2d91, type: 3}
+  m_Name: Pear
+  m_EditorClassIdentifier: 
+  LightColor: {r: 0.972549, g: 0.45882353, b: 0.7137255, a: 1}
+  MediumColor: {r: 0.93333334, g: 0.22745098, b: 0.49803922, a: 1}
+  DarkColor: {r: 0.65882355, g: 0.05490196, b: 0.18431373, a: 1}
+  MainImage: {fileID: 2100000, guid: fa5bc17f8b7368d4ba63880bc34478a4, type: 2}
+  BackgroundPattern: {fileID: 2100000, guid: b38e6d16913189442a65019d61ff1b31, type: 2}
+  Name: Pear
+  TypeName: Fruit
+  TypeIcon: {fileID: 2800000, guid: d6de77c2bd775bf4394360f217ede1cc, type: 3}
+  HappinessPoints: 1
+  FruitRender: {fileID: 2800000, guid: 8597c5bed2fedc14da800f94f5edf1c0, type: 3}

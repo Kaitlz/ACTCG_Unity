@@ -19,7 +19,7 @@ MonoBehaviour:
   BackgroundPattern: {fileID: 2100000, guid: 993c149527190644c934e097503fa4dc, type: 2}
   Name: Coco
   TypeName: Villager
-  TypeIcon: {fileID: 2800000, guid: a35a6daaffd836b4a9912296c782380e, type: 3}
+  TypeIcon: {fileID: 2800000, guid: 0e9c66d594b2ef847bb8ecc37a226113, type: 3}
   PersonalityIcon: {fileID: 2800000, guid: 5e0412dcab7e6b347b6ad9ec2e1f599f, type: 3}
   StarSignIcon: {fileID: 2800000, guid: 69fe3bbb103805a438a79e333c9c469b, type: 3}
   GenderIcon: {fileID: 2800000, guid: 199c6e684dcea854d9713ab8a65e9013, type: 3}

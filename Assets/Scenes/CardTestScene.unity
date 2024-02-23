@@ -627,19 +627,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyCard: {fileID: 5721948483064883492, guid: ea356b511574d9847bf328bea4139851, type: 3}
-  villagerValues:
+  cardValues:
   - {fileID: 11400000, guid: 278ef2148abc035459c8753eecd6b94c, type: 2}
   - {fileID: 11400000, guid: f2e8715c9113d4c46b641e2946bb19cc, type: 2}
-  - {fileID: 11400000, guid: d27bd0c864c4c3e46b5e436a387727ec, type: 2}
-  - {fileID: 11400000, guid: 869f3330b2d069b43a7bdf869f4b9765, type: 2}
   - {fileID: 11400000, guid: 9949883dd500d4e4482bd2b7a9bd0b95, type: 2}
   - {fileID: 11400000, guid: f1a7ffe32c5eebd4ea2ed8a3c35d8be3, type: 2}
+  - {fileID: 11400000, guid: d27bd0c864c4c3e46b5e436a387727ec, type: 2}
+  - {fileID: 11400000, guid: 869f3330b2d069b43a7bdf869f4b9765, type: 2}
   - {fileID: 11400000, guid: f894f1c7fbe9dc844b03e8ca764e8b48, type: 2}
   - {fileID: 11400000, guid: eb895c4d35eb6d947a9b5dfc3918036d, type: 2}
   - {fileID: 11400000, guid: 9e2f9696e5f578d42948ae3d79e409ab, type: 2}
   - {fileID: 11400000, guid: b422e2ad83281264b9e5af4dde7306ad, type: 2}
   - {fileID: 11400000, guid: 18ba332cdda9daf49b69a986940ac04e, type: 2}
   - {fileID: 11400000, guid: a5b1df9d9f1675644b43eb0a55b746d1, type: 2}
+  - {fileID: 11400000, guid: ca1fb45b76fb8cd4492dbd79642dcf0e, type: 2}
+  - {fileID: 11400000, guid: cae3115061460084d8bbb2f7fbd68a97, type: 2}
 --- !u!4 &289177114
 Transform:
   m_ObjectHideFlags: 0

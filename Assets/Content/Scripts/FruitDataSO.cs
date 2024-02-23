@@ -5,5 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "fruitData", menuName = "Scriptable Objects/Fruit Data", order = 4)]
 public class FruitDataSO : CardDataSO
 {
-    public int HappinessPoints;
+    public string HappinessPoints;
+    public Texture2D FruitRender;
 }

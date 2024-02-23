@@ -19,7 +19,7 @@ MonoBehaviour:
   BackgroundPattern: {fileID: 2100000, guid: 993c149527190644c934e097503fa4dc, type: 2}
   Name: Pashmina
   TypeName: Villager
-  TypeIcon: {fileID: 2800000, guid: 426722a1eb71dd148b845abe4d9b1329, type: 3}
+  TypeIcon: {fileID: 2800000, guid: 622f0aef9f049e248af38d96da2b3d19, type: 3}
   PersonalityIcon: {fileID: 2800000, guid: ddf129f805f824045acc2f5c4a607fc8, type: 3}
   StarSignIcon: {fileID: 2800000, guid: 6d9471c3aa3fce94ea6703bc6fb2689b, type: 3}
   GenderIcon: {fileID: 2800000, guid: 199c6e684dcea854d9713ab8a65e9013, type: 3}

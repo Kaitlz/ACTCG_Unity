@@ -9,7 +9,8 @@ public class CardSpawner : MonoBehaviour
     public GameObject emptyCard;
 
     // An instance of the ScriptableObject defined above.
-    public VillagerDataSO[] villagerValues;
+    //public VillagerDataSO[] villagerValues;
+    public CardDataSO[] cardValues;
 
     void Start()
     {
@@ -26,58 +27,131 @@ public class CardSpawner : MonoBehaviour
             GameObject newCard = Instantiate(emptyCard, CardLocations[i].transform.position, CardLocations[i].transform.rotation);
             // TODO: change the name of the spawned object so multiple cards don't compete for the same name
 
-            int vilValIndex = i < villagerValues.Length ? i : Random.Range(0, villagerValues.Length - 1);
+            int index = i < cardValues.Length ? i : Random.Range(0, cardValues.Length);
 
-            // Sets the name of the instantiated entity to be the string defined in the ScriptableObject and then appends it with a unique number. 
-            newCard.transform.Find("SM_CardName/Name").GetComponent<TextMeshPro>().SetText(villagerValues[vilValIndex].Name);
-            newCard.transform.Find("SM_CardBar/Type").GetComponent<TextMeshPro>().SetText(villagerValues[vilValIndex].TypeName);
+            // References to card parts
+            MeshRenderer illustration = newCard.transform.Find("SM_CardIllustrationPlane").GetComponent<MeshRenderer>();
+            MeshRenderer personality = newCard.transform.Find("SM_CardBar_Middle/Personality").GetComponent<MeshRenderer>();
+            MeshRenderer starSign = newCard.transform.Find("SM_CardName/BottomInfo/Star Sign").GetComponent<MeshRenderer>();
+            MeshRenderer gender = newCard.transform.Find("SM_CardName/BottomInfo/Gender").GetComponent<MeshRenderer>();
+            MeshRenderer heart = newCard.transform.Find("Stats/Circle_TopRight_Happiness_Fruit/Heart").GetComponent<MeshRenderer>();
+            MeshRenderer descBox = newCard.transform.Find("SM_CardDescBox_Bottom").GetComponent<MeshRenderer>();
+            MeshRenderer cardBarTop = newCard.transform.Find("SM_CardBar_Top").GetComponent<MeshRenderer>();
+            MeshRenderer cardBarMiddle = newCard.transform.Find("SM_CardBar_Middle").GetComponent<MeshRenderer>();
+            MeshRenderer fruitRender = newCard.transform.Find("FruitRender").GetComponent<MeshRenderer>();
+            MeshRenderer typeIcon = newCard.transform.Find("Stats/Circle_TopLeft_Type/Type").GetComponent<MeshRenderer>();
+            MeshRenderer cardPattern = newCard.transform.Find("CardPattern").GetComponent<MeshRenderer>();
 
-            Material speciesMat = newCard.transform.Find("Stats/Circle_TopLeft_Type/Species").GetComponent<MeshRenderer>().material;
-            if (villagerValues[vilValIndex].TypeIcon.name.Contains("SpeciesIconSilhouette"))
-            {
-                speciesMat.SetTexture("_Texture", villagerValues[vilValIndex].TypeIcon);
-                speciesMat.SetColor("_Color", villagerValues[vilValIndex].DarkColor);
-            }
-            else
-            {
-                speciesMat.shader = Shader.Find("HDRP/Unlit");
-                speciesMat.SetTexture("_UnlitColorMap", villagerValues[vilValIndex].TypeIcon);
-                speciesMat.SetColor("_UnlitColor", villagerValues[vilValIndex].DarkColor);
-            }
-
-            Material personalityMat = newCard.transform.Find("SM_CardBar/Personality").GetComponent<MeshRenderer>().material;
-            personalityMat.SetTexture("_UnlitColorMap", villagerValues[vilValIndex].PersonalityIcon);
-
-            newCard.transform.Find("SM_CardBar").GetComponent<MeshRenderer>().material.SetColor("_UnlitColor", villagerValues[vilValIndex].DarkColor);
-
-            Material descMat = newCard.transform.Find("SM_CardDescBox").GetComponent<MeshRenderer>().material;
-            descMat.SetColor("_TopColor", villagerValues[vilValIndex].DarkColor);
-            descMat.SetColor("_BottomColor", villagerValues[vilValIndex].MediumColor);
-            descMat.SetColor("_BackgroundColor", villagerValues[vilValIndex].LightColor);
-
-            Material nameMat = newCard.transform.Find("SM_CardName").GetComponent<MeshRenderer>().material;
-            nameMat.SetColor("_TopColor", villagerValues[vilValIndex].DarkColor);
-            nameMat.SetColor("_BottomColor", villagerValues[vilValIndex].MediumColor);
+            TextMeshPro dob = newCard.transform.Find("SM_CardName/BottomInfo/DOB").GetComponent<TextMeshPro>();
+            TextMeshPro happiness = newCard.transform.Find("Stats/Circle_TopRight_Happiness_Fruit/Happiness").GetComponent<TextMeshPro>();
+            TextMeshPro description = newCard.transform.Find("SM_CardDescBox_Bottom/Description").GetComponent<TextMeshPro>();
+            TextMeshPro typeTop = newCard.transform.Find("SM_CardBar_Top/Type").GetComponent<TextMeshPro>();
+            TextMeshPro typeMiddle = newCard.transform.Find("SM_CardBar_Middle/Type").GetComponent<TextMeshPro>();
 
             Material backgroundMat = newCard.transform.Find("Solid Background").GetComponent<MeshRenderer>().material;
-            backgroundMat.SetColor("_ShadowColor", villagerValues[vilValIndex].DarkColor);
-            backgroundMat.SetColor("_Color", villagerValues[vilValIndex].LightColor);
+            Material nameMat = newCard.transform.Find("SM_CardName").GetComponent<MeshRenderer>().material;
 
-            newCard.transform.Find("SM_CardIllustrationPlane").GetComponent<MeshRenderer>().material = villagerValues[vilValIndex].MainImage;
+            if (cardValues[index] is VillagerDataSO)
+            {
+                VillagerDataSO villager = (cardValues[index] as VillagerDataSO);
 
-            Transform Happiness = newCard.transform.Find("Stats/Circle_TopRight_Happiness_Fruit/Happiness");
-            Happiness.GetComponent<TextMeshPro>().SetText(villagerValues[vilValIndex].HappinessPoints);
-            //Happiness.GetComponent<MeshRenderer>().material.SetColor("_FaceColor", villagerValues[vilValIndex].DarkColor);
+                // Disable Unnecessary Items
+                cardBarTop.enabled = false;
+                typeTop.enabled = false;
+                fruitRender.enabled = false;
+                cardPattern.enabled = false;
 
-            newCard.transform.Find("Stats/Circle_TopRight_Happiness_Fruit/Heart").GetComponent<MeshRenderer>().material.SetColor("_UnlitColor", villagerValues[vilValIndex].DarkColor);
+                // Main Image
+                // TODO: dupe this for special NPCs
+                illustration.enabled = true;
+                illustration.material = villager.MainImage;
 
-            newCard.transform.Find("Description").GetComponent<TextMeshPro>().SetText(villagerValues[vilValIndex].Description);
+                // Personality
+                personality.enabled = true;
+                personality.material.SetTexture("_UnlitColorMap", villager.PersonalityIcon);
 
-            newCard.transform.Find("SM_CardName/BottomInfo/DOB").GetComponent<TextMeshPro>().SetText(villagerValues[vilValIndex].DOB);
+                // Star Sign
+                starSign.enabled = true;
+                starSign.material.SetTexture("_UnlitColorMap", villager.StarSignIcon);
 
-            newCard.transform.Find("SM_CardName/BottomInfo/Star Sign").GetComponent<MeshRenderer>().material.SetTexture("_UnlitColorMap", villagerValues[vilValIndex].StarSignIcon);
+                // Gender
+                gender.enabled = true;
+                gender.material.SetTexture("_UnlitColorMap", villager.GenderIcon);
 
-            newCard.transform.Find("SM_CardName/BottomInfo/Gender").GetComponent<MeshRenderer>().material.SetTexture("_UnlitColorMap", villagerValues[vilValIndex].GenderIcon);
+                // Date of Birth
+                dob.enabled = true;
+                dob.SetText(villager.DOB);
+
+                // Happiness Points
+                happiness.enabled = true;
+                happiness.SetText(villager.HappinessPoints);
+
+                heart.enabled = true;
+                heart.material.SetColor("_UnlitColor", villager.DarkColor);
+
+                // Description
+                // TODO: this will likely need to be duped for special NPCs and tools
+                description.enabled = true;
+                description.SetText(villager.Description);
+
+                descBox.enabled = true;
+                descBox.material.SetColor("_TopColor", villager.DarkColor);
+                descBox.material.SetColor("_BottomColor", villager.MediumColor);
+                descBox.material.SetColor("_BackgroundColor", villager.LightColor);
+            }
+            else if (cardValues[index] is FruitDataSO)
+            {
+                FruitDataSO fruit = (cardValues[index] as FruitDataSO);
+
+                // Disable Unnecessary Items
+                illustration.enabled = false;
+                personality.enabled = false;
+                starSign.enabled = false;
+                gender.enabled = false;
+                dob.enabled = false;
+                description.enabled = false;
+                descBox.enabled = false;
+                cardBarMiddle.enabled = false;
+                typeMiddle.enabled = false;
+
+                // Happiness Points
+                happiness.enabled = true;
+                happiness.SetText(fruit.HappinessPoints);
+
+                heart.enabled = true;
+                heart.material.SetColor("_UnlitColor", fruit.DarkColor);
+
+                // Fruit Render
+                fruitRender.enabled = true;
+                fruitRender.material.SetTexture("_UnlitColorMap", fruit.FruitRender);
+
+                // Card Pattern
+                // TODO: actually set the texture for this vs tools
+                cardPattern.enabled = true;
+            }
+
+            // Solid Background
+            backgroundMat.SetColor("_ShadowColor", cardValues[index].DarkColor);
+            backgroundMat.SetColor("_Color", cardValues[index].LightColor);
+
+            // Name Text
+            newCard.transform.Find("SM_CardName/Name").GetComponent<TextMeshPro>().SetText(cardValues[index].Name);
+
+            // Name Box Color
+            nameMat.SetColor("_TopColor", cardValues[index].DarkColor);
+            nameMat.SetColor("_BottomColor", cardValues[index].MediumColor);
+
+            // Card Bar Color
+            cardBarTop.material.SetColor("_UnlitColor", cardValues[index].DarkColor);
+            cardBarMiddle.material.SetColor("_UnlitColor", cardValues[index].DarkColor);
+
+            // Type Text
+            typeTop.SetText(cardValues[index].TypeName);
+            typeMiddle.SetText(cardValues[index].TypeName);
+
+            // Type Icon
+            typeIcon.material.SetTexture("_UnlitColorMap", cardValues[index].TypeIcon);
+            typeIcon.material.SetColor("_UnlitColor", cardValues[index].DarkColor);
         }
     }
 }
