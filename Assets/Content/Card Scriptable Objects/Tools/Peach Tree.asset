@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876542b5f91135041b88d7d08d7fe144, type: 3}
+  m_Name: Peach Tree
+  m_EditorClassIdentifier: 
+  LightColor: {r: 0.5882353, g: 0.90588236, b: 0.68235296, a: 1}
+  MediumColor: {r: 0.44313726, g: 0.79607844, b: 0.3372549, a: 1}
+  DarkColor: {r: 0.06666667, g: 0.40784314, b: 0.21960784, a: 1}
+  MainImage: {fileID: 2100000, guid: fa5bc17f8b7368d4ba63880bc34478a4, type: 2}
+  BackgroundMaterial: {fileID: 2100000, guid: b38e6d16913189442a65019d61ff1b31, type: 2}
+  BackgroundPattern: {fileID: 2800000, guid: afb8be29001030344aa699ad7bc31e5d, type: 3}
+  Name: Peach Tree
+  TypeName: Tree
+  TypeIcon: {fileID: 2800000, guid: e6fe9d5539b430648a4869f150cd5100, type: 3}
+  ToolRender: {fileID: 2800000, guid: d2c7da9cf46fb34469cdf53a4178447e, type: 3}
+  Description: Once a turn, returns a peach card.
