@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - CardLocation
+  - Card
   layers:
   - Default
   - TransparentFX
