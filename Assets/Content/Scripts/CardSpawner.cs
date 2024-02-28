@@ -9,7 +9,6 @@ public class CardSpawner : MonoBehaviour
     public GameObject emptyCard;
 
     // An instance of the ScriptableObject defined above.
-    //public VillagerDataSO[] villagerValues;
     public CardDataSO[] cardValues;
 
     void Start()
@@ -43,6 +42,7 @@ public class CardSpawner : MonoBehaviour
             MeshRenderer typeIcon = newCard.transform.Find("Stats/Circle_TopLeft_Type/Type").GetComponent<MeshRenderer>();
             MeshRenderer patternFull = newCard.transform.Find("CardPattern").GetComponent<MeshRenderer>();
             MeshRenderer circleHappiness = newCard.transform.Find("Stats/Circle_TopLeft_Happiness").GetComponent<MeshRenderer>();
+            MeshRenderer highlight = newCard.transform.Find("Highlight").GetComponent<MeshRenderer>();
 
             TextMeshPro dob = newCard.transform.Find("SM_CardName/BottomInfo/DOB").GetComponent<TextMeshPro>();
             TextMeshPro happiness = newCard.transform.Find("Stats/Circle_TopLeft_Happiness/Happiness").GetComponent<TextMeshPro>();
@@ -232,6 +232,9 @@ public class CardSpawner : MonoBehaviour
             // Type Icon
             typeIcon.material.SetTexture("_UnlitColorMap", cardValues[index].TypeIcon);
             typeIcon.material.SetColor("_UnlitColor", cardValues[index].DarkColor);
+
+            // Highlight
+            highlight.material.SetColor("_Color", cardValues[index].LightColor);
         }
     }
 }
