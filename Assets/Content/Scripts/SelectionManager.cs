@@ -15,27 +15,54 @@ public enum turnStates
     BATTLE
 }
 
+public struct myTransform
+{
+    public Vector3 localPosition;
+    public Vector3 worldPosition;
+    public Quaternion rotation;
+    public Vector3 scale;
+
+    public Vector3 up;
+}
+
 public class SelectionManager : MonoBehaviour
 {
+    public LayerMask CardCollision;
+    public LayerMask SelectionCollision;
+
+    [SerializeField] private float offset = -50;
 
     [SerializeField] private string selectableTag = "Card";
-    [SerializeField] private Material highlightMaterial;
-    [SerializeField] private Material defaultMaterial;
+    [SerializeField] private float lookAtIntensity = 2;
+    [SerializeField] private float moveSpeed = 10f;
 
     private Camera m_camera;
+    private Collider planeCollider;
 
     private Transform hoverSelection;
     private Transform clickSelection;
+
+    private myTransform clickSelectionOriginal; 
 
     private gameStates gameState;
     private turnStates turnState;
 
     private void Start()
     {
-        m_camera = Camera.main;
+        //m_camera = Camera.main;
+        m_camera = GameObject.Find("Key Cam").GetComponent<Camera>();
+        Debug.Log("CAMERA POS: " + m_camera.transform.position + " : " + m_camera.transform.TransformPoint(m_camera.transform.position));
+
+        planeCollider = GameObject.Find("Plane").GetComponent<BoxCollider>();
 
         gameState = gameStates.PLAYER_TURN;
         turnState = turnStates.PLACEMENT;
+
+        // Avoid divide by 0 errors
+        if (lookAtIntensity == 0)
+        {
+            lookAtIntensity = 1;
+        }
     }
 
     /*
@@ -74,32 +101,40 @@ public class SelectionManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse clicked!");
-
             if (clickSelection == null)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, CardCollision))
                 {
                     Transform selection = hit.transform;
 
+                    Debug.Log(selection.gameObject.name);
+
                     if (selection.CompareTag(selectableTag))
                     {
-                        Debug.Log("CLICK HIT");
-                        selection.localScale = selection.localScale * 1.5f;
+                        clickSelectionOriginal.localPosition = selection.position;
+                        clickSelectionOriginal.worldPosition = selection.TransformPoint(selection.position);
+                        clickSelectionOriginal.rotation = selection.rotation;
+                        clickSelectionOriginal.scale = selection.localScale;
+                        clickSelectionOriginal.up = selection.up;
+
                         clickSelection = selection;
+                        clickSelection.localScale = clickSelection.localScale * 1.5f;
                     }
-                }
-                else
-                {
-                    Debug.Log("CLICK MISS");
                 }
             }
             else
             {
-                clickSelection.localScale = clickSelection.localScale / 1.5f;
+                clickSelection.position = clickSelectionOriginal.localPosition;
+                clickSelection.rotation = clickSelectionOriginal.rotation;
+                clickSelection.localScale = clickSelectionOriginal.scale;
+                
                 clickSelection = null;
+                clickSelectionOriginal.localPosition = Vector3.zero;
+                clickSelectionOriginal.rotation = Quaternion.identity;
+                clickSelectionOriginal.scale = Vector3.zero;
+                clickSelectionOriginal.up = Vector3.zero;
             }
         }
 
@@ -112,17 +147,14 @@ public class SelectionManager : MonoBehaviour
                 hoverSelection = null;
             }
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, CardCollision))
             {
                 Transform selection = hit.transform;
-                Debug.Log(selection.name);
-
-
+                
                 if (selection.CompareTag(selectableTag))
                 {
-                    Debug.Log("HOVER HIT");
                     MeshRenderer selectionRenderer = selection.Find("Highlight").GetComponent<MeshRenderer>();
                     if (selectionRenderer != null)
                     {
@@ -132,17 +164,48 @@ public class SelectionManager : MonoBehaviour
                     hoverSelection = selection;
                 }
             }
-            else
-            {
-                Debug.Log("HOVER MISS");
-            }
         }
         else
         {
-            var lookAtPos = Input.mousePosition;
-            lookAtPos.z = transform.position.z - m_camera.transform.position.z;
-            lookAtPos = m_camera.ScreenToWorldPoint(lookAtPos);
-            clickSelection.up = lookAtPos - transform.position;
+            Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, SelectionCollision))
+            {
+                if (hit.collider == planeCollider)
+                {
+                    clickSelection.position = Vector3.MoveTowards(clickSelection.position, hit.point, Time.deltaTime * moveSpeed);
+                    //clickSelection.position = m_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, offset));
+                }
+            }
+
+
+                //Vector3 pos = Input.mousePosition;
+                //pos.z = 5f;
+            //clickSelection.position = m_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, offset));
+            //Debug.Log(clickSelection.position + " : " + clickSelection.TransformPoint(clickSelection.position));
+
+            //Vector3 clickSelectionWorldPos = clickSelection.TransformPoint(clickSelection.position);
+            //Vector3 cameraWorldPos = m_camera.transform.TransformPoint(m_camera.transform.position);
+
+            //Vector3 lookAtPos = Input.mousePosition;
+            //lookAtPos.x = clickSelection.position.x - (m_camera.transform.position.x / lookAtIntensity);
+            //lookAtPos.z = clickSelection.position.z - (m_camera.transform.position.z / lookAtIntensity);
+            //lookAtPos = m_camera.ScreenToWorldPoint(lookAtPos);
+            
+            //float angle = Vector3.Angle(lookAtPos - clickSelection.position, clickSelectionOriginal.up);
+            //clickSelection.up = lookAtPos - clickSelection.position;
+            //clickSelection.up = Quaternion.AngleAxis(angle, Vector3.right) * (lookAtPos - clickSelection.position);
+            //clickSelection.up = Quaternion.AngleAxis(angle, Vector3.Cross(lookAtPos - clickSelection.position, clickSelectionOriginal.up)) * (lookAtPos - clickSelection.position);
+
+            //Vector3 blah = Input.mousePosition;
+            //blah.z = clickSelectionWorldPos.z - (cameraWorldPos.z / lookAtIntensity);
+            //blah = m_camera.ScreenToWorldPoint(blah);
+            
+            //Vector3 goToPos = new Vector3(lookAtPos.x, clickSelectionOriginal.worldPosition.y, lookAtPos.z);
+            //clickSelection.position = goToPos;
+
+            //Debug.Log(angle);
+            //Debug.DrawLine(lookAtPos, clickSelection.position, Color.red);
         }
     }
 }
