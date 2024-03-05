@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2995130038157742933}
   m_Layer: 0
   m_Name: CardZone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_TagString: CardLocation
+  m_Icon: {fileID: 2800000, guid: 1253db45980752a4e9b41f9dfab575bb, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -78,6 +78,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 17efa2780ba02974bbdb90099d52913a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 17efa2780ba02974bbdb90099d52913a, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 17efa2780ba02974bbdb90099d52913a, type: 3}
