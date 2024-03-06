@@ -21,5 +21,6 @@ MonoBehaviour:
   Name: Orange
   TypeName: Fruit
   TypeIcon: {fileID: 2800000, guid: d6de77c2bd775bf4394360f217ede1cc, type: 3}
+  CardBackface: {fileID: 2800000, guid: 96ea52bde49491a4198e56293825cfc7, type: 3}
   HappinessPoints: 1
   FruitRender: {fileID: 2800000, guid: 806e37503b10b23419f5b30a4c83774f, type: 3}

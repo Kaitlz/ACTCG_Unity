@@ -21,6 +21,7 @@ MonoBehaviour:
   Name: Merengue
   TypeName: Villager
   TypeIcon: {fileID: 2800000, guid: 10f87c395d3e3154f8cdf7182aaafc27, type: 3}
+  CardBackface: {fileID: 2800000, guid: 6fc5a41fb6573b34bb92c0e10ef46561, type: 3}
   PersonalityIcon: {fileID: 2800000, guid: 5e0412dcab7e6b347b6ad9ec2e1f599f, type: 3}
   StarSignIcon: {fileID: 2800000, guid: 69fe3bbb103805a438a79e333c9c469b, type: 3}
   GenderIcon: {fileID: 2800000, guid: 199c6e684dcea854d9713ab8a65e9013, type: 3}

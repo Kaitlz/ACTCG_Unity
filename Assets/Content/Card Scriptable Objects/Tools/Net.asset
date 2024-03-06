@@ -21,5 +21,6 @@ MonoBehaviour:
   Name: Net
   TypeName: Tool
   TypeIcon: {fileID: 2800000, guid: 600cf02eae093c44781bbb2219238138, type: 3}
+  CardBackface: {fileID: 2800000, guid: 96ea52bde49491a4198e56293825cfc7, type: 3}
   ToolRender: {fileID: 2800000, guid: 19b427aa8145f6543bf3a3c09e225f7b, type: 3}
   Description: '[TEMP DESCRIPTION] A shovel is a tool.'

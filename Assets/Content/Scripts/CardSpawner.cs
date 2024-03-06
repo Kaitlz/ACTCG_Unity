@@ -43,6 +43,7 @@ public class CardSpawner : MonoBehaviour
             MeshRenderer patternFull = newCard.transform.Find("CardPattern").GetComponent<MeshRenderer>();
             MeshRenderer circleHappiness = newCard.transform.Find("Stats/Circle_TopLeft_Happiness").GetComponent<MeshRenderer>();
             MeshRenderer highlight = newCard.transform.Find("Highlight").GetComponent<MeshRenderer>();
+            MeshRenderer backface = newCard.transform.Find("Backface").GetComponent<MeshRenderer>();
 
             TextMeshPro dob = newCard.transform.Find("SM_CardName/BottomInfo/DOB").GetComponent<TextMeshPro>();
             TextMeshPro happiness = newCard.transform.Find("Stats/Circle_TopLeft_Happiness/Happiness").GetComponent<TextMeshPro>();
@@ -235,6 +236,9 @@ public class CardSpawner : MonoBehaviour
 
             // Highlight
             highlight.material.SetColor("_Color", cardValues[index].LightColor);
+
+            // Backface
+            backface.material.SetTexture("_UnlitColorMap", cardValues[index].CardBackface);
         }
     }
 }

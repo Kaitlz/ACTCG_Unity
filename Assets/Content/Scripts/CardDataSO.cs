@@ -13,4 +13,5 @@ public class CardDataSO : ScriptableObject
     public string Name;
     public string TypeName;
     public Texture2D TypeIcon;
+    public Texture2D CardBackface;
 }

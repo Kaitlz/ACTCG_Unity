@@ -21,5 +21,6 @@ MonoBehaviour:
   Name: Pear
   TypeName: Fruit
   TypeIcon: {fileID: 2800000, guid: d6de77c2bd775bf4394360f217ede1cc, type: 3}
+  CardBackface: {fileID: 2800000, guid: 96ea52bde49491a4198e56293825cfc7, type: 3}
   HappinessPoints: 1
   FruitRender: {fileID: 2800000, guid: 8597c5bed2fedc14da800f94f5edf1c0, type: 3}
