@@ -47,12 +47,12 @@ public class SelectionManager : MonoBehaviour
     private gameStates gameState;
     private turnStates turnState;
 
+    private bool alreadyMoved = false;
+    [SerializeField] private float cardOffsetTowardsCamera = 5f;
+
     private void Start()
     {
-        //m_camera = Camera.main;
         m_camera = GameObject.Find("Key Cam").GetComponent<Camera>();
-        Debug.Log("CAMERA POS: " + m_camera.transform.position + " : " + m_camera.transform.TransformPoint(m_camera.transform.position));
-
         planeCollider = GameObject.Find("Plane").GetComponent<BoxCollider>();
 
         gameState = gameStates.PLAYER_TURN;
@@ -140,11 +140,23 @@ public class SelectionManager : MonoBehaviour
 
         if (clickSelection == null)
         {
+            // Disable hover selection
             if (hoverSelection != null)
             {
+                hoverSelection.position = clickSelectionOriginal.localPosition;
+                hoverSelection.rotation = clickSelectionOriginal.rotation;
+                hoverSelection.localScale = clickSelectionOriginal.scale;
+
                 MeshRenderer SelectionRenderer = hoverSelection.Find("Highlight").GetComponent<MeshRenderer>();
                 SelectionRenderer.enabled = false;
                 hoverSelection = null;
+
+                clickSelectionOriginal.localPosition = Vector3.zero;
+                clickSelectionOriginal.rotation = Quaternion.identity;
+                clickSelectionOriginal.scale = Vector3.zero;
+                clickSelectionOriginal.up = Vector3.zero;
+
+                alreadyMoved = false;
             }
 
             Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
@@ -156,9 +168,25 @@ public class SelectionManager : MonoBehaviour
                 if (selection.CompareTag(selectableTag))
                 {
                     MeshRenderer selectionRenderer = selection.Find("Highlight").GetComponent<MeshRenderer>();
+                    
+                    // Enable hover selection
                     if (selectionRenderer != null)
                     {
+                        clickSelectionOriginal.localPosition = selection.position;
+                        clickSelectionOriginal.worldPosition = selection.TransformPoint(selection.position);
+                        clickSelectionOriginal.rotation = selection.rotation;
+                        clickSelectionOriginal.scale = selection.localScale;
+                        clickSelectionOriginal.up = selection.up;
+
                         selectionRenderer.enabled = true;
+                        selection.rotation = Quaternion.FromToRotation(Vector3.up, m_camera.transform.position - selection.position);
+                        selection.rotation = Quaternion.Euler(selection.rotation.eulerAngles.x, m_camera.transform.rotation.eulerAngles.z, selection.rotation.eulerAngles.z);
+                        
+                        if (!alreadyMoved)
+                        {
+                            selection.position = Vector3.MoveTowards(selection.position, m_camera.transform.position, cardOffsetTowardsCamera); 
+                            alreadyMoved = true;
+                        }
                     }
 
                     hoverSelection = selection;
@@ -174,38 +202,8 @@ public class SelectionManager : MonoBehaviour
                 if (hit.collider == planeCollider)
                 {
                     clickSelection.position = Vector3.MoveTowards(clickSelection.position, hit.point, Time.deltaTime * moveSpeed);
-                    //clickSelection.position = m_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, offset));
                 }
             }
-
-
-                //Vector3 pos = Input.mousePosition;
-                //pos.z = 5f;
-            //clickSelection.position = m_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, offset));
-            //Debug.Log(clickSelection.position + " : " + clickSelection.TransformPoint(clickSelection.position));
-
-            //Vector3 clickSelectionWorldPos = clickSelection.TransformPoint(clickSelection.position);
-            //Vector3 cameraWorldPos = m_camera.transform.TransformPoint(m_camera.transform.position);
-
-            //Vector3 lookAtPos = Input.mousePosition;
-            //lookAtPos.x = clickSelection.position.x - (m_camera.transform.position.x / lookAtIntensity);
-            //lookAtPos.z = clickSelection.position.z - (m_camera.transform.position.z / lookAtIntensity);
-            //lookAtPos = m_camera.ScreenToWorldPoint(lookAtPos);
-            
-            //float angle = Vector3.Angle(lookAtPos - clickSelection.position, clickSelectionOriginal.up);
-            //clickSelection.up = lookAtPos - clickSelection.position;
-            //clickSelection.up = Quaternion.AngleAxis(angle, Vector3.right) * (lookAtPos - clickSelection.position);
-            //clickSelection.up = Quaternion.AngleAxis(angle, Vector3.Cross(lookAtPos - clickSelection.position, clickSelectionOriginal.up)) * (lookAtPos - clickSelection.position);
-
-            //Vector3 blah = Input.mousePosition;
-            //blah.z = clickSelectionWorldPos.z - (cameraWorldPos.z / lookAtIntensity);
-            //blah = m_camera.ScreenToWorldPoint(blah);
-            
-            //Vector3 goToPos = new Vector3(lookAtPos.x, clickSelectionOriginal.worldPosition.y, lookAtPos.z);
-            //clickSelection.position = goToPos;
-
-            //Debug.Log(angle);
-            //Debug.DrawLine(lookAtPos, clickSelection.position, Color.red);
         }
     }
 }
