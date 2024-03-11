@@ -92,9 +92,13 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b498a5a29d38269438c17d4aaef3b518, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 17efa2780ba02974bbdb90099d52913a, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -6990977746479501852, guid: d696ae98269f16946a728cdf374c366a, type: 3}
     - target: {fileID: 919132149155446097, guid: 17efa2780ba02974bbdb90099d52913a, type: 3}
       propertyPath: m_Name
-      value: SM_CardPlane
+      value: SM_CardZone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
