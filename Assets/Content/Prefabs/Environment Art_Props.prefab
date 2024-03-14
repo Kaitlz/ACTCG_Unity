@@ -272,6 +272,7 @@ Transform:
   - {fileID: 6897222629767925589}
   - {fileID: 5884934448652703209}
   - {fileID: 3047660393704750006}
+  - {fileID: 7897126937425222430}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8540177594103941097
@@ -1533,6 +1534,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_TentBakePlane
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73f70fa4ea32bd049af59a9460881d6b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1744,6 +1749,92 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 36adf063f1715ad4797169a03c4ed51e, type: 3}
   m_PrefabInstance: {fileID: 7267389683685226427}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7643314894982053109
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7721758491551805599}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.881824
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.881824
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.881824
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -33.09
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -26.14
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9999143
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.01309576
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 1.501
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_Name
+      value: SM_TentShadowPlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+--- !u!4 &7897126937425222430 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5d3730b119a369449b2277548db7e038, type: 3}
+  m_PrefabInstance: {fileID: 7643314894982053109}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7732189260137227806
 PrefabInstance:
