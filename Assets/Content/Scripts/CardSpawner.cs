@@ -107,8 +107,8 @@ public class CardSpawner : MonoBehaviour
 
             descBox.enabled = true;
             descBox.material.SetColor("_TopColor", villager.DarkColor);
-            descBox.material.SetColor("_BottomColor", villager.MediumColor);
-            descBox.material.SetColor("_BackgroundColor", villager.LightColor);
+            descBox.material.SetColor("_BottomColor", villager.DarkColor);
+            descBox.material.SetColor("_BackgroundColor", villager.MediumColor);
             descBox.material.SetTexture("_Texture", villager.BackgroundPattern);
         }
         else if (data is SpecialNPCDataSO)

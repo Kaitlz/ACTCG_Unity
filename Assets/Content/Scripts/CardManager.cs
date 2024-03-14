@@ -41,27 +41,41 @@ public class Board
 
     public bool isPlayerCard(GameObject cardObj)
     {
+        if (cardObj == null)
+        {
+            return false;
+        }
+
         foreach (Card playCard in player.inPlay)
         {
-            if (playCard.cardObj == cardObj)
+            if (playCard != null)
             {
-                return true;
+                if (playCard.cardObj == cardObj)
+                {
+                    return true;
+                }
             }
         }
 
         foreach (Card handCard in player.hand)
         {
-            if (handCard.cardObj == cardObj)
+            if (handCard != null)
             {
-                return true;
+                if (handCard.cardObj == cardObj)
+                {
+                    return true;
+                }
             }
         }
 
         foreach (Card deckCard in player.deck)
         {
-            if (deckCard.cardObj == cardObj)
+            if (deckCard != null)
             {
-                return true;
+                if (deckCard.cardObj == cardObj)
+                {
+                    return true;
+                }
             }
         }
 
