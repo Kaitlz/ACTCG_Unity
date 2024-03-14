@@ -39,6 +39,27 @@ public class Board
         opponent = new PlayerSide(playSize, handSize, deckSize);
     }
 
+    public bool isHandCard(GameObject cardObj)
+    {
+        if (cardObj == null)
+        {
+            return false;
+        }
+
+        foreach (Card handCard in player.hand)
+        {
+            if (handCard != null)
+            {
+                if (handCard.cardObj == cardObj)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public bool isPlayerCard(GameObject cardObj)
     {
         if (cardObj == null)

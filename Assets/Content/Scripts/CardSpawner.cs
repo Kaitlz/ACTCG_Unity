@@ -148,8 +148,8 @@ public class CardSpawner : MonoBehaviour
 
             descBox.enabled = true;
             descBox.material.SetColor("_TopColor", npc.DarkColor);
-            descBox.material.SetColor("_BottomColor", npc.MediumColor);
-            descBox.material.SetColor("_BackgroundColor", npc.LightColor);
+            descBox.material.SetColor("_BottomColor", npc.DarkColor);
+            descBox.material.SetColor("_BackgroundColor", npc.MediumColor);
             descBox.material.SetTexture("_Texture", npc.BackgroundPattern);
         }
         else if (data is ToolDataSO)

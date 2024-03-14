@@ -21,7 +21,7 @@ MonoBehaviour:
   Name: Axe
   TypeName: Tool
   TypeIcon: {fileID: 2800000, guid: 600cf02eae093c44781bbb2219238138, type: 3}
-  CardBackface: {fileID: 2800000, guid: 96ea52bde49491a4198e56293825cfc7, type: 3}
+  CardBackface: {fileID: 2800000, guid: 5ee4b9a8679948349919342032b3b7d6, type: 3}
   ToolRender: {fileID: 2800000, guid: 63598b0985d04554c83bf4c3b4fbbddd, type: 3}
   Description: Discard on use. Cut down a tree in a village. Receive a fruit immediately
     on cutting a fruit tree.

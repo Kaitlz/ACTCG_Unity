@@ -21,6 +21,6 @@ MonoBehaviour:
   Name: Cherry
   TypeName: Fruit
   TypeIcon: {fileID: 2800000, guid: d6de77c2bd775bf4394360f217ede1cc, type: 3}
-  CardBackface: {fileID: 2800000, guid: 96ea52bde49491a4198e56293825cfc7, type: 3}
+  CardBackface: {fileID: 2800000, guid: 5ee4b9a8679948349919342032b3b7d6, type: 3}
   HappinessPoints: 1
   FruitRender: {fileID: 2800000, guid: bceff6742a7a9eb4897db51513352053, type: 3}

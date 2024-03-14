@@ -52,6 +52,7 @@ public class SelectionManager : MonoBehaviour
     private Vector3 lastPosition = Vector3.zero;
 
     [SerializeField] private float cardOffsetTowardsCamera = 5f;
+    [SerializeField] private float handHoverOffset = 2.5f;
     [SerializeField] private float cardRotationIntensity = 2f;
     [SerializeField] private float cardMaxRotation = 10f;
     [SerializeField] private float cardRotationDamping = 5f;
@@ -104,6 +105,7 @@ public class SelectionManager : MonoBehaviour
                                 clickSelectionOriginal.up = selection.up;
                             }
 
+                            Cursor.visible = false;
                             hoverSelection = null;
                             clickSelection = selection;
                             clickSelection.rotation = Quaternion.identity;
@@ -114,6 +116,8 @@ public class SelectionManager : MonoBehaviour
             }
             else // Ending a click selection
             {
+                Cursor.visible = true;
+
                 // Disable selection highlight
                 MeshRenderer SelectionRenderer = clickSelection.Find("Highlight").GetComponent<MeshRenderer>();
                 SelectionRenderer.enabled = false;
@@ -172,7 +176,15 @@ public class SelectionManager : MonoBehaviour
 
                             selection.rotation = Quaternion.FromToRotation(Vector3.up, m_camera.transform.position - selection.position);
                             selection.rotation = Quaternion.Euler(selection.rotation.eulerAngles.x, m_camera.transform.rotation.eulerAngles.z, selection.rotation.eulerAngles.z);
-                            selection.position = Vector3.MoveTowards(selection.position, m_camera.transform.position, cardOffsetTowardsCamera);
+
+                            Vector3 desiredPos = selection.position;
+
+                            if (board.isHandCard(selection.gameObject))
+                            {
+                                desiredPos = new Vector3(selection.position.x, selection.position.y, selection.position.z - handHoverOffset);
+                            }
+
+                            selection.position = Vector3.MoveTowards(desiredPos, m_camera.transform.position, cardOffsetTowardsCamera);
 
                             MeshRenderer selectionRenderer = selection.Find("Highlight").GetComponent<MeshRenderer>();
                             if (selectionRenderer != null)

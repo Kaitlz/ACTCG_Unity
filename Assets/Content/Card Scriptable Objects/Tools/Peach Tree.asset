@@ -21,6 +21,6 @@ MonoBehaviour:
   Name: Peach Tree
   TypeName: Tree
   TypeIcon: {fileID: 2800000, guid: e6fe9d5539b430648a4869f150cd5100, type: 3}
-  CardBackface: {fileID: 2800000, guid: 96ea52bde49491a4198e56293825cfc7, type: 3}
+  CardBackface: {fileID: 2800000, guid: 5ee4b9a8679948349919342032b3b7d6, type: 3}
   ToolRender: {fileID: 2800000, guid: d2c7da9cf46fb34469cdf53a4178447e, type: 3}
   Description: Placeable. Once a turn, returns a peach card.
