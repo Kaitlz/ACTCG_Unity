@@ -27,5 +27,5 @@ MonoBehaviour:
   GenderIcon: {fileID: 2800000, guid: ec28ebd543641fd4aa4ed54287bc93b8, type: 3}
   DOB: 01/01
   HappinessPoints: 1
-  Description: Bob naps for 1 turn and gains 1 happiness. Can't move out while asleep.
-    Gains 2x happiness from fruit.
+  Description: Placeable. Bob naps for 1 turn and gains 1 happiness. Can't move out
+    while asleep. Gains 2x happiness from fruit.

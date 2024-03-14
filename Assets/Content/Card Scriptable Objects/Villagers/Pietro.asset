@@ -27,4 +27,4 @@ MonoBehaviour:
   GenderIcon: {fileID: 2800000, guid: ec28ebd543641fd4aa4ed54287bc93b8, type: 3}
   DOB: 04/19
   HappinessPoints: 2
-  Description: '[TEMP DESCRIPTION] Pietro is a sheep.'
+  Description: Placeable. All changes to Pietro's happiness are doubled.

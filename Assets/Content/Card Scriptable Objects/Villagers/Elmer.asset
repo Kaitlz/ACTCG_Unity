@@ -27,4 +27,4 @@ MonoBehaviour:
   GenderIcon: {fileID: 2800000, guid: ec28ebd543641fd4aa4ed54287bc93b8, type: 3}
   DOB: 10/05
   HappinessPoints: 2
-  Description: '[TEMP DESCRIPTION] Elmer is a horse.'
+  Description: Placeable. Elmer catches a bug once per turn.

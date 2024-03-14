@@ -23,4 +23,5 @@ MonoBehaviour:
   TypeIcon: {fileID: 2800000, guid: 600cf02eae093c44781bbb2219238138, type: 3}
   CardBackface: {fileID: 2800000, guid: 96ea52bde49491a4198e56293825cfc7, type: 3}
   ToolRender: {fileID: 2800000, guid: 3498799c5dd74ba4f98a394c163b6ca3, type: 3}
-  Description: '[TEMP DESCRIPTION] A shovel is a tool.'
+  Description: Discard on use. Immediately mature a tree card or decrease a villager's
+    happiness by 1.
