@@ -78,7 +78,7 @@ public class CardSpawner : MonoBehaviour
             illustration.material = villager.MainImage;
 
             // Personality
-            personality.enabled = true;
+            //personality.enabled = true;
             personality.material.SetTexture("_UnlitColorMap", villager.PersonalityIcon);
 
             // Star Sign

@@ -502,6 +502,9 @@ MonoBehaviour:
   lookAtIntensity: 1
   moveSpeed: 250
   cardOffsetTowardsCamera: 10
+  cardRotationIntensity: 2
+  cardMaxRotation: 5
+  cardRotationDamping: 5
 --- !u!114 &289177116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,6 +924,10 @@ PrefabInstance:
     - target: {fileID: 8448545954852813637, guid: 6be4d48afa62a6a46b2d28181e43f192, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448545954852813637, guid: 6be4d48afa62a6a46b2d28181e43f192, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3926,6 +3933,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6369321117287564463, guid: 075c014f49c0f3e45bf12c12af4a3534, type: 3}
+      propertyPath: customRenderingSettings
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4495,6 +4506,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 04dfd33f56f9c1a4fb5d3caa8246c87f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 04dfd33f56f9c1a4fb5d3caa8246c87f, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 04dfd33f56f9c1a4fb5d3caa8246c87f, type: 3}
@@ -6090,6 +6105,9 @@ MonoBehaviour:
   lookAtIntensity: 1
   moveSpeed: 250
   cardOffsetTowardsCamera: 10
+  cardRotationIntensity: 2
+  cardMaxRotation: 30
+  cardRotationDamping: 5
 --- !u!4 &1724951904
 Transform:
   m_ObjectHideFlags: 0
@@ -6824,6 +6842,10 @@ PrefabInstance:
     - target: {fileID: 2985573927669881647, guid: d201179b46250ec40be81a19eb0004d1, type: 3}
       propertyPath: m_Name
       value: Lighting
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000497236327441746, guid: d201179b46250ec40be81a19eb0004d1, type: 3}
+      propertyPath: m_ProbeSettings.cameraSettings.culling.cullingMask.m_Bits
+      value: 823
       objectReference: {fileID: 0}
     - target: {fileID: 7027376162669414092, guid: d201179b46250ec40be81a19eb0004d1, type: 3}
       propertyPath: m_LocalPosition.x

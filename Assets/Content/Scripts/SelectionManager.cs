@@ -34,7 +34,7 @@ public class SelectionManager : MonoBehaviour
 
     [SerializeField] private string selectableTag = "Card";
     [SerializeField] private float lookAtIntensity = 2;
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 5f;
 
     private Camera m_camera;
     private Collider planeCollider;
@@ -42,17 +42,32 @@ public class SelectionManager : MonoBehaviour
     private Transform hoverSelection;
     private Transform clickSelection;
 
-    private myTransform clickSelectionOriginal; 
+    private myTransform clickSelectionOriginal;
+
+    private Board board;
 
     private gameStates gameState;
     private turnStates turnState;
 
-    [SerializeField] private float cardOffsetTowardsCamera = 5f;
+    private Vector3 lastPosition = Vector3.zero;
 
-    private void Start()
+    [SerializeField] private float cardOffsetTowardsCamera = 5f;
+    [SerializeField] private float cardRotationIntensity = 2f;
+    [SerializeField] private float cardMaxRotation = 10f;
+    [SerializeField] private float cardRotationDamping = 5f;
+
+    private void Awake()
     {
         m_camera = GameObject.Find("Key Cam").GetComponent<Camera>();
         planeCollider = GameObject.Find("SelectionCollision").GetComponent<BoxCollider>();
+    }
+
+    private void Start()
+    {
+        if (gameObject.GetComponent<CardManager>())
+        {
+            board = gameObject.GetComponent<CardManager>().board;
+        }
 
         gameState = gameStates.PLAYER_TURN;
         turnState = turnStates.PLACEMENT;
@@ -63,38 +78,6 @@ public class SelectionManager : MonoBehaviour
             lookAtIntensity = 1;
         }
     }
-
-    /*
-    private void OnMouseDown()
-    {
-        Debug.Log("Mouse clicked!");
-
-        if (clickSelection == null)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                Transform selection = hit.transform;
-
-                if (selection.CompareTag(selectableTag))
-                {
-                    Debug.Log("CLICK HIT");
-                    selection.localScale = selection.localScale * 10;
-                    clickSelection = selection;
-                }
-            }
-            else
-            {
-                Debug.Log("CLICK MISS");
-            }
-        }
-        else
-        {
-            clickSelection = null;
-        }
-    }
-    */
 
     private void Update()
     {
@@ -108,19 +91,24 @@ public class SelectionManager : MonoBehaviour
                 {
                     Transform selection = hit.transform;
 
-                    Debug.Log("Click selected: " + selection.gameObject.name);
-
                     if (selection.CompareTag(selectableTag))
                     {
-                        //clickSelectionOriginal.localPosition = selection.position;
-                        //clickSelectionOriginal.worldPosition = selection.TransformPoint(selection.position);
-                        //clickSelectionOriginal.rotation = selection.rotation;
-                        //clickSelectionOriginal.scale = selection.localScale;
-                        //clickSelectionOriginal.up = selection.up;
+                        if (board.isPlayerCard(selection.gameObject))
+                        {
+                            if (clickSelectionOriginal.scale == Vector3.zero)
+                            {
+                                clickSelectionOriginal.localPosition = selection.position;
+                                clickSelectionOriginal.worldPosition = selection.TransformPoint(selection.position);
+                                clickSelectionOriginal.rotation = selection.rotation;
+                                clickSelectionOriginal.scale = selection.localScale;
+                                clickSelectionOriginal.up = selection.up;
+                            }
 
-                        hoverSelection = null;
-                        clickSelection = selection;
-                        clickSelection.localScale = clickSelection.localScale * 1.5f;
+                            hoverSelection = null;
+                            clickSelection = selection;
+                            clickSelection.rotation = Quaternion.identity;
+                            clickSelection.localScale = clickSelection.localScale * 1.5f;
+                        }
                     }
                 }
             }
@@ -141,6 +129,8 @@ public class SelectionManager : MonoBehaviour
                 clickSelectionOriginal.rotation = Quaternion.identity;
                 clickSelectionOriginal.scale = Vector3.zero;
                 clickSelectionOriginal.up = Vector3.zero;
+
+                lastPosition = Vector3.zero;
             }
         }
         else if (clickSelection == null) // Not clicking and nothing is click selected
@@ -155,36 +145,40 @@ public class SelectionManager : MonoBehaviour
                 
                 if (selection.CompareTag(selectableTag))
                 {
-                    raycastSuccess = true;
-
-                    if (hoverSelection != selection) // Hover selection was previously null or a different card
+                    if (board.isPlayerCard(selection.gameObject))
                     {
-                        if (hoverSelection != null) // Reset whatever card was previously hovered
+                        raycastSuccess = true;
+
+                        if (hoverSelection != selection || clickSelectionOriginal.scale == Vector3.zero) // Hover selection was previously null or a different card
                         {
-                            hoverSelection.position = clickSelectionOriginal.localPosition;
-                            hoverSelection.rotation = clickSelectionOriginal.rotation;
-                            hoverSelection.localScale = clickSelectionOriginal.scale;
+                            if (hoverSelection != null && clickSelectionOriginal.scale != Vector3.zero) // Reset whatever card was previously hovered
+                            {
+                                hoverSelection.position = clickSelectionOriginal.localPosition;
+                                hoverSelection.rotation = clickSelectionOriginal.rotation;
+                                hoverSelection.localScale = clickSelectionOriginal.scale;
 
-                            MeshRenderer SelectionRenderer = hoverSelection.Find("Highlight").GetComponent<MeshRenderer>();
-                            SelectionRenderer.enabled = false;
-                        }
+                                MeshRenderer SelectionRenderer = hoverSelection.Find("Highlight").GetComponent<MeshRenderer>();
+                                SelectionRenderer.enabled = false;
+                            }
 
-                        // Enable hover selection
-                        hoverSelection = selection;
+                            // Enable hover selection
+                            hoverSelection = selection;
 
-                        MeshRenderer selectionRenderer = selection.Find("Highlight").GetComponent<MeshRenderer>();
-                        if (selectionRenderer != null)
-                        {
                             clickSelectionOriginal.localPosition = selection.position;
                             clickSelectionOriginal.worldPosition = selection.TransformPoint(selection.position);
                             clickSelectionOriginal.rotation = selection.rotation;
                             clickSelectionOriginal.scale = selection.localScale;
                             clickSelectionOriginal.up = selection.up;
 
-                            selectionRenderer.enabled = true;
                             selection.rotation = Quaternion.FromToRotation(Vector3.up, m_camera.transform.position - selection.position);
                             selection.rotation = Quaternion.Euler(selection.rotation.eulerAngles.x, m_camera.transform.rotation.eulerAngles.z, selection.rotation.eulerAngles.z);
                             selection.position = Vector3.MoveTowards(selection.position, m_camera.transform.position, cardOffsetTowardsCamera);
+
+                            MeshRenderer selectionRenderer = selection.Find("Highlight").GetComponent<MeshRenderer>();
+                            if (selectionRenderer != null)
+                            {
+                                selectionRenderer.enabled = true;
+                            }
                         }
                     }
                 }
@@ -202,12 +196,12 @@ public class SelectionManager : MonoBehaviour
                     MeshRenderer SelectionRenderer = hoverSelection.Find("Highlight").GetComponent<MeshRenderer>();
                     SelectionRenderer.enabled = false;
                     hoverSelection = null;
-
-                    clickSelectionOriginal.localPosition = Vector3.zero;
-                    clickSelectionOriginal.rotation = Quaternion.identity;
-                    clickSelectionOriginal.scale = Vector3.zero;
-                    clickSelectionOriginal.up = Vector3.zero;
                 }
+
+                clickSelectionOriginal.localPosition = Vector3.zero;
+                clickSelectionOriginal.rotation = Quaternion.identity;
+                clickSelectionOriginal.scale = Vector3.zero;
+                clickSelectionOriginal.up = Vector3.zero;
             }
         }
         else // Not clicking, but something IS click selected
@@ -220,6 +214,14 @@ public class SelectionManager : MonoBehaviour
                 {
                     // Make selected card follow mouse
                     clickSelection.position = Vector3.MoveTowards(clickSelection.position, hit.point, Time.deltaTime * moveSpeed);
+
+                    Vector3 velocity = (clickSelection.position - lastPosition) / Time.deltaTime;
+                    Vector3 adjustedVelocity = Vector3.ClampMagnitude(new Vector3(velocity.z, 0, -velocity.x), cardMaxRotation);
+
+                    Quaternion desiredRotation = Quaternion.Euler(adjustedVelocity * cardRotationIntensity);
+                    clickSelection.rotation = Quaternion.Slerp(clickSelection.rotation, desiredRotation, Time.deltaTime * cardRotationDamping);
+
+                    lastPosition = clickSelection.position;
                 }
             }
         }

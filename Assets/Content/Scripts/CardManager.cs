@@ -38,6 +38,35 @@ public class Board
         player = new PlayerSide(playSize, handSize, deckSize);
         opponent = new PlayerSide(playSize, handSize, deckSize);
     }
+
+    public bool isPlayerCard(GameObject cardObj)
+    {
+        foreach (Card playCard in player.inPlay)
+        {
+            if (playCard.cardObj == cardObj)
+            {
+                return true;
+            }
+        }
+
+        foreach (Card handCard in player.hand)
+        {
+            if (handCard.cardObj == cardObj)
+            {
+                return true;
+            }
+        }
+
+        foreach (Card deckCard in player.deck)
+        {
+            if (deckCard.cardObj == cardObj)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
 
 public class CardManager : MonoBehaviour
@@ -47,7 +76,7 @@ public class CardManager : MonoBehaviour
     int sideHandSize = 0;
     int sideDeckSize = 0;
 
-    Board board;
+    public Board board;
     CardSpawner spawner;
 
     void Awake()
@@ -72,22 +101,6 @@ public class CardManager : MonoBehaviour
     void Start()
     {
         spawner.SpawnCards(board);
-
-        /*
-        Debug.Log("PIP");
-        Card[] pip = board.player.inPlay;
-        foreach (Card c in pip)
-        {
-            if (c == null)
-            {
-                Debug.Log("null");
-            }
-            else
-            {
-                Debug.Log(c.data.name);
-            }
-        }
-        */
     }
 
     void Update()
