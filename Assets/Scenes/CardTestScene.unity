@@ -442,18 +442,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 823123340}
   playerInPlay:
-  - {fileID: 11400000, guid: 278ef2148abc035459c8753eecd6b94c, type: 2}
-  - {fileID: 11400000, guid: 375b10c24e4df1346a47f5cb2f20fce2, type: 2}
+  - {fileID: 11400000, guid: 166460d4f0961b0478f4bb17abeac4db, type: 2}
+  - {fileID: 11400000, guid: d27bd0c864c4c3e46b5e436a387727ec, type: 2}
   - {fileID: 0}
   - {fileID: 11400000, guid: 18ba332cdda9daf49b69a986940ac04e, type: 2}
-  - {fileID: 11400000, guid: b422e2ad83281264b9e5af4dde7306ad, type: 2}
+  - {fileID: 11400000, guid: 375b10c24e4df1346a47f5cb2f20fce2, type: 2}
   playerHand:
+  - {fileID: 11400000, guid: 278ef2148abc035459c8753eecd6b94c, type: 2}
+  - {fileID: 11400000, guid: b422e2ad83281264b9e5af4dde7306ad, type: 2}
   - {fileID: 11400000, guid: ca1fb45b76fb8cd4492dbd79642dcf0e, type: 2}
-  - {fileID: 11400000, guid: 166460d4f0961b0478f4bb17abeac4db, type: 2}
   - {fileID: 11400000, guid: 5cfa1a3278956bb4da50cf9a50891e15, type: 2}
-  - {fileID: 11400000, guid: d27bd0c864c4c3e46b5e436a387727ec, type: 2}
   playerDeck:
-  - {fileID: 11400000, guid: 2f9f0c3bc57108c4ebf316b86227f203, type: 2}
+  - {fileID: 11400000, guid: f1a7ffe32c5eebd4ea2ed8a3c35d8be3, type: 2}
   - {fileID: 11400000, guid: d93ca9a87a933fa43ae89b150554324f, type: 2}
   opponentInPlay:
   - {fileID: 11400000, guid: bcb43bd79414e1647bc5e5c7a6ef71a8, type: 2}
