@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8191316530456303089}
   - component: {fileID: 3221845790953851881}
   - component: {fileID: 6369321117287564463}
+  - component: {fileID: 6658929775589391952}
   m_Layer: 0
   m_Name: Key Cam
   m_TagString: Untagged
@@ -222,3 +223,15 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
+--- !u!114 &6658929775589391952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4073386781445108499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c39daf814fe5a429876e627d266288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
