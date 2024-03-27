@@ -4537,6 +4537,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_TreeWithAnimation (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e42a8c552fef1a24f81000ce680354cd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3717703357207825447, guid: e42a8c552fef1a24f81000ce680354cd, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
