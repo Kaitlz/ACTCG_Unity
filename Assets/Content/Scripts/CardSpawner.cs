@@ -248,7 +248,12 @@ public class CardSpawner : MonoBehaviour
         // Backface
         backface.material.SetTexture("_UnlitColorMap", data.CardBackface);
 
-        return new Card(newCard, data);
+        newCard.AddComponent<Card>();
+        Card ncCard = newCard.GetComponent<Card>();
+        ncCard.cardObj = newCard;
+        ncCard.data = data;
+        return ncCard;
+        //return new Card(newCard, data);
     }
 
     Card[] SpawnCardGroup(CardDataSO[] group, Transform[] cardLocations)
@@ -356,6 +361,8 @@ public class CardSpawner : MonoBehaviour
                 index++;
             }
             board.opponent.deck = SpawnCardGroup(opponentDeck, zoneOpponentDeck);
+
+            Debug.Log(board);
         }
     }
 }

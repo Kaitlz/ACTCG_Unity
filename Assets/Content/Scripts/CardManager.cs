@@ -2,15 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card
+/*public class Card
 {
     public GameObject cardObj;
+    public CardDataSO data;
+
+    // TODO: might need to make this a monobehavior so one card is always associated with one game object, and I can access the transform data
+    public Card(GameObject spawnedCard, CardDataSO spawnedCardData)
+    {
+        cardObj = spawnedCard;
+        data = spawnedCardData;
+    }
+}*/
+
+public class Card : MonoBehaviour
+{
+    protected Color color;
+    protected Color color2;
+
+    protected MeshRenderer meshRenderer;
+    protected Material material;
+
+    protected Vector2 dissolveOffset = new Vector2(0.1f, 0);
+    protected Vector2 dissolveSpeed = new Vector2(2f, 2f);
+    protected Color dissolveColor;
+
+    protected bool isInactive;
+
+    // ----------
+    public GameObject cardObj; // TODO: this is a monobehavior now, we don't need this
     public CardDataSO data;
 
     public Card(GameObject spawnedCard, CardDataSO spawnedCardData)
     {
         cardObj = spawnedCard;
         data = spawnedCardData;
+    }
+    // ----------
+
+    protected virtual void Start()
+    {
+    }
+
+    /// <summary>
+    /// <para>Triggered when the card is used (dragged up then mouse released, with required mana).</para>
+    /// <para>This should probably be overriden by a class that inherits this class, to trigger something
+    /// or maybe add something here to trigger an event / UnityEvent, etc.</para>
+    /// <para>Base applies a dissolve effect, which can be adjusted using dissolveOffset, dissolveSpeed, dissolveColor</para>
+    /// </summary>
+    public virtual void Use()
+    {
+        // Handle Dissolve Effect
+        //StartCoroutine(Dissolve());
     }
 }
 
@@ -135,7 +178,11 @@ public class CardManager : MonoBehaviour
 
     void Start()
     {
-        spawner.SpawnCards(board);
+        if (spawner != null)
+        {
+            spawner.SpawnCards(board);
+            gameObject.GetComponent<SelectionManager>().BasicallyStart(); // TODO: remove later!
+        }
     }
 
     void Update()
