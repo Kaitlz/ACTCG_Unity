@@ -523,7 +523,9 @@ MonoBehaviour:
   cardTilt: 1
   selectionSpacing: 1
   curveStart: {x: 4.5, y: 13.5, z: 40}
+  curveMiddle: {x: -3.75, y: 13.5, z: 30}
   curveEnd: {x: -12, y: 13.5, z: 40}
+  cardDepth: 1
   handOffset: {x: 0, y: 0}
   handSize: {x: 16.5, y: 10}
 --- !u!114 &289177116
@@ -6344,7 +6346,9 @@ MonoBehaviour:
   cardTilt: 1
   selectionSpacing: 1
   curveStart: {x: 2, y: -0.7, z: 0}
-  curveEnd: {x: -2, y: -0.7, z: 0}
+  curveMiddle: {x: -3.75, y: 15, z: 30}
+  curveEnd: {x: -12, y: 13.5, z: 40}
+  cardDepth: 1
   handOffset: {x: 0, y: -0.3}
   handSize: {x: 9, y: 1.7}
 --- !u!4 &1724951904

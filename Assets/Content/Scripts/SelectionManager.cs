@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum gameStates
 {
@@ -111,14 +112,15 @@ public class SelectionManager : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Controls the curve that the hand uses.")]
-    private Vector3 curveStart = new Vector3(4.5f, 13.5f, 40), curveEnd = new Vector3(-12, 13.5f, 40);
+    private Vector3 curveStart = new Vector3(4.5f, 13.5f, 40),
+                    curveMiddle = new Vector3(-3.75f, 13.5f, 30),
+                    curveEnd = new Vector3(-12, 13.5f, 40);
 
-    // TODO: think about how I want to rework this
-        // need to be able to specify a plane in 3d space. probably directly aligned with the camera? plane must have bounds, not endless
-        // could maybe use curveStart/End as 2 points on the plane. then maybe specify another point or line to define the plane?
-        // or maybe the vector from curveStart to curveEnd could be an axis to rotate a rectangle around?
-        // or could just expect a plane child obj?? but that's not guaranteed to face the camera? I suppose I could use LookAt()?
-            // we might not WANT it aligned with the camera... we might need it aligned to the camera's view frustum or far plane or smth
+    [SerializeField]
+    [Tooltip("Controls the distance between the front and back of each consecutive card the hand.")]
+    private float cardDepth = 1f;
+
+    // TODO: I think I can delete this stuff now that I have my own hand plane in 3D
     [SerializeField]
     [Tooltip("Controls the area which is considered 'in-hand', allowing cards to be selected/reordered. " +
         "If a card leaves this area it can be used upon releasing the mouse button. " +
@@ -160,13 +162,16 @@ public class SelectionManager : MonoBehaviour
     //private void Start()
     public void BasicallyStart() // TODO: DEFINITELY CHANGE LATER
     {
-        board = gameObject.GetComponent<CardManager>().board;
+        if (gameObject.GetComponent<CardManager>())
+        {
+            board = gameObject.GetComponent<CardManager>().board;
+        }
 
         // TODO: add shit
 
         // TODO: removing transform.TransformPoint() allows curveStart/curveEnd to refer to WORLD SPACE points
         a = curveStart; // transform.TransformPoint(curveStart);
-        b = transform.position;
+        b = curveMiddle;
         c = curveEnd; // transform.TransformPoint(curveEnd);
         handBounds = new Rect((handOffset - handSize / 2), handSize);
         plane = new Plane(-Vector3.forward, transform.position);
@@ -177,9 +182,9 @@ public class SelectionManager : MonoBehaviour
         c3 = m_camera.ViewportToWorldPoint(new Vector3(h3.x, h3.y, hDist));
         c4 = m_camera.ViewportToWorldPoint(new Vector3(h4.x, h4.y, hDist));
 
-        // TODO: I think this is expecting all the cards to ALREADY be a child of this component?
-        // instead, we need an exposed list the user can add to
-        // OR maybe we KEEP the CardSpawner component for this purpose, and rip off the children of THAT component? this seems right.
+        // TODO: move CardSpawner's logic to this file
+        // all the CardDataSO's should be publicly set from this file
+        // spawn cards with the correct visuals, then add them to the hand and/or board
         int count = board.player.hand.Length; // TODO: remove later, this hand list is what will be added to the board so we actually need the number of CardSOs the user specifies
         hand = new List<Card>(count);
         for (int i = 0; i < count; i++)
@@ -201,11 +206,6 @@ public class SelectionManager : MonoBehaviour
 
         // ----------------------------//
 
-        if (gameObject.GetComponent<CardManager>())
-        {
-            board = gameObject.GetComponent<CardManager>().board;
-        }
-
         gameState = gameStates.PLAYER_TURN;
         turnState = turnStates.PLACEMENT;
 
@@ -218,54 +218,38 @@ public class SelectionManager : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.matrix = transform.localToWorldMatrix;
+        // Draw curve control points
         Gizmos.color = Color.blue;
-
         Gizmos.DrawSphere(curveStart, 0.1f);
-        //Gizmos.DrawSphere(Vector3.zero, 0.03f);
+        Gizmos.DrawSphere(curveMiddle, 0.1f);
         Gizmos.DrawSphere(curveEnd, 0.1f);
 
+        // Draw curve
         Vector3 p1 = curveStart;
-        for (int i = 0; i < 20; i++)
+        float curveSegments = 30;
+        for (int i = 0; i < curveSegments; i++)
         {
-            float t = (i + 1) / 20f;
-            Vector3 p2 = GetCurvePoint(curveStart, Vector3.zero, curveEnd, t);
+            float t = (i + 1) / curveSegments;
+            Vector3 p2 = GetCurvePoint(curveStart, curveMiddle, curveEnd, t);
             Gizmos.DrawLine(p1, p2);
             p1 = p2;
         }
 
-        if (mouseInsideHand)
-        {
-            Gizmos.color = Color.red;
-        }
-
-        Gizmos.DrawWireCube(handOffset, handSize);
-
-        // -- //
-
+        // Draw full viewport bounds
         Gizmos.color = Color.yellow;
-        
         Vector3 d1, d2, d3, d4;
         d1 = m_camera.ViewportToWorldPoint(new Vector3(0, 0, hDist));
         d2 = m_camera.ViewportToWorldPoint(new Vector3(0, 1, hDist));
         d3 = m_camera.ViewportToWorldPoint(new Vector3(1, 1, hDist));
         d4 = m_camera.ViewportToWorldPoint(new Vector3(1, 0, hDist));
 
-        //Vector3 viewportPoint = new Vector3(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height, hDist);
-        Vector3 viewportPoint = new Vector3(Input.mousePosition.x / m_camera.pixelWidth, Input.mousePosition.y / m_camera.pixelHeight, hDist);
-        //Vector3 viewportPoint = new Vector3((Input.mousePosition.x - Screen.width) / (Screen.width / 2), (Input.mousePosition.y - Screen.height) / (Screen.height / 2), hDist);
-        //Debug.Log("(" + Input.mousePosition.x + " / " + Screen.width + "), (" + Input.mousePosition.y + " / " + Screen.height + ")  --  " + viewportPoint);
-        Vector3 point = m_camera.ViewportToWorldPoint(viewportPoint);
-
-        Gizmos.DrawLine(m_camera.transform.position, point);
-
         Gizmos.DrawLine(d1, d2);
         Gizmos.DrawLine(d2, d3);
         Gizmos.DrawLine(d3, d4);
         Gizmos.DrawLine(d4, d1);
 
+        // Draw hand bounds
         Gizmos.color = mouseInsideHand ? Color.green : Color.red;
-
         c1 = m_camera.ViewportToWorldPoint(new Vector3(h1.x, h1.y, hDist));
         c2 = m_camera.ViewportToWorldPoint(new Vector3(h2.x, h2.y, hDist));
         c3 = m_camera.ViewportToWorldPoint(new Vector3(h3.x, h3.y, hDist));
@@ -276,23 +260,37 @@ public class SelectionManager : MonoBehaviour
         Gizmos.DrawLine(c3, c4);
         Gizmos.DrawLine(c4, c1);
 
+        // Draw camera to mouse line
+        Vector3 viewportPoint = new Vector3(Input.mousePosition.x / m_camera.pixelWidth, Input.mousePosition.y / m_camera.pixelHeight, hDist);
+        Vector3 point = m_camera.ViewportToWorldPoint(viewportPoint);
+        Gizmos.DrawLine(m_camera.transform.position, point);
+
+        // Draw mouse position
         Gizmos.DrawSphere(point, 1f);
     }
 
+    // Determines whether a point in 3D space lies within the face of a triangle. Point must be on the same plane as the triangle.
+    // Creates 3 smaller triangles composed of 'p' and the original points of 'tri', then checks the normals of the new triangles.
+    // If all new normals point in the same direction, then 'p' is within 'tri'.
     private bool pointInTriangle(Vector3 p, Triangle tri)
     {
+        // Get components of tri
         Vector3 a = tri.A;
         Vector3 b = tri.B;
         Vector3 c = tri.C;
 
+        // Shift tri so p becomes its origin
         a -= p;
         b -= p;
         c -= p;
 
-        Vector3 u = Vector3.Cross(b, c);
-        Vector3 v = Vector3.Cross(c, a);
-        Vector3 w = Vector3.Cross(a, b);
+        // Compute the normal vectors for triangles
+        Vector3 u = Vector3.Cross(b, c); // PBC
+        Vector3 v = Vector3.Cross(c, a); // PCA
+        Vector3 w = Vector3.Cross(a, b); // PAB
 
+        // Check if any of the normals point away from each other
+        // If p is NOT in tri, then the new triangles would form a pyramid and at least 1 normal would have to face away
         if (Vector3.Dot(u, v) < 0f)
         {
             return false;
@@ -308,7 +306,6 @@ public class SelectionManager : MonoBehaviour
         
     private void Update()
     {
-        
         // --------------------------------------------------------
         // HANDLE MOUSE & RAYCAST POSITION
         // --------------------------------------------------------
@@ -323,9 +320,11 @@ public class SelectionManager : MonoBehaviour
         // Mouse movement velocity
         if (cardTilt)
         {
+            // TODO: fix hardcoded values?? this might be some sort of 16x9 aspect ratio biz
             mousePosDelta = (mousePos - prevMousePos) * new Vector2(1600f / Screen.width, 900f / Screen.height) * Time.deltaTime;
             prevMousePos = mousePos;
 
+            // TODO: expose?
             float tiltStrength = 3f;
             float tiltDrag = 3f;
             float tiltSpeed = 50f;
@@ -363,16 +362,10 @@ public class SelectionManager : MonoBehaviour
         Triangle bounds1 = new Triangle(c1, c2, c3);
         Triangle bounds2 = new Triangle(c1, c3, c4);
 
-        //Vector3 viewportPoint = new Vector3((Input.mousePosition.x / Screen.width), (Input.mousePosition.y / Screen.height), hDist);
         Vector3 viewportPoint = new Vector3(Input.mousePosition.x / m_camera.pixelWidth, Input.mousePosition.y / m_camera.pixelHeight, hDist);
-        Debug.Log("(" + Input.mousePosition.x + " / " + m_camera.pixelWidth + "), (" + Input.mousePosition.y + " / " + m_camera.pixelHeight + ")  --  " + viewportPoint);
         Vector3 point = m_camera.ViewportToWorldPoint(viewportPoint);
 
         mouseInsideHand = pointInTriangle(point, bounds1) || pointInTriangle(point, bounds2);
-
-        //Vector3 point = transform.InverseTransformPoint(mouseWorldPos);
-        //mouseInsideHand = handBounds.Contains(point);
-
 
         bool mouseButton = Input.GetMouseButton(0);
 
@@ -394,6 +387,7 @@ public class SelectionManager : MonoBehaviour
             float selectOffset = 0;
             if (noCardHeld)
             {
+                // TODO: fix hardcoded values??
                 selectOffset = 0.02f * Mathf.Clamp01(1 - Mathf.Abs(Mathf.Abs(i - selected) - 1) / (float)count * 3) * Mathf.Sign(i - selected);
             }
             float t = (i + 0.5f) / count + selectOffset * selectionSpacing;
@@ -417,13 +411,19 @@ public class SelectionManager : MonoBehaviour
             // Sorting Order
             if (mouseHoveringOnSelected || onDraggedCard)
             {
+                // TODO: not sure if this is right yet? might need to actually point along the up vector of the viewport
+                    // I think that would be something like...
+                        // d1 = m_camera.ViewportToWorldPoint(new Vector3(0, 0, hDist));
+                        // d2 = m_camera.ViewportToWorldPoint(new Vector3(0, 1, hDist));
+                        // cardUp = d2-d1
+                if (cardUprightWhenSelected) cardUp = (Vector3.Cross(c2 - c1, c3 - c1)).normalized; // Card up dir matches hand zone normal
+
                 // When selected bring card to front
-                if (cardUprightWhenSelected) cardUp = Vector3.up;
-                cardPos.z = transform.position.z - 0.2f;
+                cardPos -= (Vector3.Cross(c2 - c1, c3 - c1)).normalized * cardDepth;
             }
             else
             {
-                cardPos.z = transform.position.z + t * 0.5f; // TODO: cards currently only move towards the z pos of THIS gameobject
+                cardPos += (Vector3.Cross(c2 - c1, c3 - c1)).normalized * t * cardDepth; // Shift card depth in hand based on hand zone normal
             }
 
             // Rotation
@@ -450,6 +450,7 @@ public class SelectionManager : MonoBehaviour
             }
             else
             {
+                // TODO: fix hardcoded values
                 cardPos = Vector3.MoveTowards(cardTransform.position, cardPos, 6f * Time.deltaTime);
                 cardTransform.position = cardPos;
             }
