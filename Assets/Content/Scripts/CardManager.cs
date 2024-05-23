@@ -181,7 +181,7 @@ public class CardManager : MonoBehaviour
         if (spawner != null)
         {
             spawner.SpawnCards(board);
-            gameObject.GetComponent<SelectionManager>().BasicallyStart(); // TODO: remove later!
+            //gameObject.GetComponent<SelectionManager>().BasicallyStart(); // TODO: remove later!
         }
     }
 

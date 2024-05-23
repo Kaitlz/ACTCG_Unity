@@ -160,37 +160,48 @@ public class SelectionManager : MonoBehaviour
     }
 
     //private void Start()
-    public void BasicallyStart() // TODO: DEFINITELY CHANGE LATER
+    public void BasicallyStart(Card[] cardHand) // TODO: DEFINITELY CHANGE LATER
     {
         if (gameObject.GetComponent<CardManager>())
         {
             board = gameObject.GetComponent<CardManager>().board;
         }
 
-        // TODO: add shit
-
-        // TODO: removing transform.TransformPoint() allows curveStart/curveEnd to refer to WORLD SPACE points
-        a = curveStart; // transform.TransformPoint(curveStart);
+        a = curveStart;
         b = curveMiddle;
-        c = curveEnd; // transform.TransformPoint(curveEnd);
+        c = curveEnd;
         handBounds = new Rect((handOffset - handSize / 2), handSize);
-        plane = new Plane(-Vector3.forward, transform.position);
-        prevMousePos = Input.mousePosition;
 
         c1 = m_camera.ViewportToWorldPoint(new Vector3(h1.x, h1.y, hDist));
         c2 = m_camera.ViewportToWorldPoint(new Vector3(h2.x, h2.y, hDist));
         c3 = m_camera.ViewportToWorldPoint(new Vector3(h3.x, h3.y, hDist));
         c4 = m_camera.ViewportToWorldPoint(new Vector3(h4.x, h4.y, hDist));
 
+        plane = new Plane(c1, c2, c3);
+        prevMousePos = Input.mousePosition;
+
         // TODO: move CardSpawner's logic to this file
         // all the CardDataSO's should be publicly set from this file
         // spawn cards with the correct visuals, then add them to the hand and/or board
-        int count = board.player.hand.Length; // TODO: remove later, this hand list is what will be added to the board so we actually need the number of CardSOs the user specifies
+        int count = cardHand.Length;// board.player.hand.Length; // TODO: remove later, this hand list is what will be added to the board so we actually need the number of CardSOs the user specifies
         hand = new List<Card>(count);
         for (int i = 0; i < count; i++)
         {
-            hand.Add(board.player.hand[i]); // TODO: will change later as well
+            Card card = cardHand[i];
+
+            float t = (i + 0.5f) / count;
+            Vector3 cardPos = GetCurvePoint(a, b, c, t);
+            Vector3 cardUp = Vector3.up;
+            Vector3 cardForward = -GetCurveNormal(a, b, c, t);
+
+            cardPos += (Vector3.Cross(c2 - c1, c3 - c1)).normalized * t * cardDepth; // Shift card depth in hand based on hand zone normal
+            card.transform.position = cardPos;
+            card.transform.rotation = Quaternion.LookRotation(cardForward, cardUp);
+
+            AddCardToHand(cardHand[i]);
+            //hand.Add(cardHand[i]); // TODO: will change later as well
         }
+        board.player.hand = cardHand;
 
         /*
         // Add transform children to hand
@@ -232,6 +243,14 @@ public class SelectionManager : MonoBehaviour
             float t = (i + 1) / curveSegments;
             Vector3 p2 = GetCurvePoint(curveStart, curveMiddle, curveEnd, t);
             Gizmos.DrawLine(p1, p2);
+
+            Vector3 p3 = GetCurveNormal(curveStart, curveMiddle, curveEnd, t);
+            p3 = Vector3.Normalize(p3);
+            p3 += p1;
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawLine(p1, p3);
+            Gizmos.color = Color.blue;
+
             p1 = p2;
         }
 
@@ -341,7 +360,7 @@ public class SelectionManager : MonoBehaviour
             }
         }
 
-        // Get world position from mouse
+        // Get world position from mouse--this is a point on the camera plane (c1, c2, c3)
         Ray ray = m_camera.ScreenPointToRay(mousePos);
         if (plane.Raycast(ray, out float enter))
         {
@@ -349,13 +368,13 @@ public class SelectionManager : MonoBehaviour
         }
 
         // Get distance to current selected card (for comparing against other cards later, to find closest)
-        int count = hand.Count; //transform.childCount;
+        int count = hand.Count;
         float sqrDistance = 1000;
         if (selected >= 0 && selected < count)
         {
             float t = (selected + 0.5f) / count;
             Vector3 p = GetCurvePoint(a, b, c, t);
-            sqrDistance = (p - mouseWorldPos).sqrMagnitude;
+            sqrDistance = (p - mouseWorldPos).sqrMagnitude; // if d is less than this, then a card will be selected
         }
 
         // Check if mouse is inside hand bounds
@@ -385,23 +404,46 @@ public class SelectionManager : MonoBehaviour
 
             // Get Position along Curve (for card positioning)
             float selectOffset = 0;
-            if (noCardHeld)
+            if (noCardHeld && mouseInsideHand)
             {
                 // TODO: fix hardcoded values??
-                selectOffset = 0.02f * Mathf.Clamp01(1 - Mathf.Abs(Mathf.Abs(i - selected) - 1) / (float)count * 3) * Mathf.Sign(i - selected);
+                float offsetMultiplier = 0.02f;
+                float numCardsMultiplier = 1f; // idk what this does, might affect the 'responsiveness' of the hand or how much all the other cards react to 1 being selected?
+
+                selectOffset = offsetMultiplier * Mathf.Sign(i - selected); // sign shifts the selected card and any before it to the positive dir, and any behind it to the negative dir
+                selectOffset *= Mathf.Clamp01(1 - Mathf.Abs(Mathf.Abs(i - selected) - 1) / count);
+
+                /*selectOffset =  offsetMultiplier *
+                                Mathf.Clamp01(1 - Mathf.Abs(Mathf.Abs(i - selected) - 1) /
+                                (float)count * numCardsMultiplier) *
+                                Mathf.Sign(i - selected);
+                */
             }
             float t = (i + 0.5f) / count + selectOffset * selectionSpacing;
             Vector3 p = GetCurvePoint(a, b, c, t);
 
+            // TODO: this whole section is stupid
+            // why am I calculating if the mouse is close to the card? why can't I just raycast hit it?? idk maybe it would stutter if I'm not careful
+                // I guess the benefit to calculating a card is you automatically know the card index in the hand. can I get that from a raycast??
+                    // yeah with a raycast we can just hit a card collider and check if it's a component of the card at hand[i]
+                    // we could also use a raycast layer/filter to ONLY care about card collisions
+                // and maybe calculating is cheaper than raycasts every frame?? is that even an issue?
+            // onSelectedCard is calculated with d and sqrDistance (and sqrDistance is either just a big number or calculated from the dist between the curve and mouse)
+            // mouseCloseToCard is also calculated with d and a distance
+            // why do we need both?? is there a point to knowing a selected card that the mouse is still far from?
+            // or is it possible to be close to a card that is NOT selected??
+            // if we DO care about distances from mouse, we need to find a solution for the curve being far from the camera/hand plane
             float d = (p - mouseWorldPos).sqrMagnitude;
-            bool mouseCloseToCard = d < 0.5f;
-            bool mouseHoveringOnSelected = onSelectedCard && mouseCloseToCard && mouseInsideHand; //  && mouseInsideHand
+            bool mouseCloseToCard = d < 80;
+            bool mouseHoveringOnSelected = onSelectedCard && mouseCloseToCard && mouseInsideHand;
 
             // Handle Card Position & Rotation
             //Vector3 cardUp = p - (transform.position + Vector3.down * 7);
-            Vector3 cardUp = GetCurveNormal(a, b, c, t);
-            Vector3 cardPos = p + (mouseHoveringOnSelected ? cardTransform.up * 0.3f : Vector3.zero);
-            Vector3 cardForward = Vector3.forward;
+            Vector3 cardUp = Vector3.up;//GetCurveNormal(a, b, c, t);
+
+            float selectionUpOffset = 5f;
+            Vector3 cardPos = p + (mouseHoveringOnSelected ? cardTransform.up * selectionUpOffset : Vector3.zero);
+            Vector3 cardForward = -GetCurveNormal(a, b, c, t);//Vector3.forward;
 
             /* Card Tilt is disabled when in hand as they can clip through eachother :(
             if (cardTilt && onSelectedCard && mouseButton) {
@@ -412,11 +454,16 @@ public class SelectionManager : MonoBehaviour
             if (mouseHoveringOnSelected || onDraggedCard)
             {
                 // TODO: not sure if this is right yet? might need to actually point along the up vector of the viewport
-                    // I think that would be something like...
-                        // d1 = m_camera.ViewportToWorldPoint(new Vector3(0, 0, hDist));
-                        // d2 = m_camera.ViewportToWorldPoint(new Vector3(0, 1, hDist));
-                        // cardUp = d2-d1
-                if (cardUprightWhenSelected) cardUp = (Vector3.Cross(c2 - c1, c3 - c1)).normalized; // Card up dir matches hand zone normal
+                // I think that would be something like...
+                // d1 = m_camera.ViewportToWorldPoint(new Vector3(0, 0, hDist));
+                // d2 = m_camera.ViewportToWorldPoint(new Vector3(0, 1, hDist));
+                // cardUp = d2-d1
+                // or maybe plane.normal?
+                if (cardUprightWhenSelected)
+                {
+                    cardUp = (Vector3.Cross(c2 - c1, c3 - c1)).normalized; // Card up dir matches hand zone normal
+                    cardForward = (c1 - c2).normalized;
+                }
 
                 // When selected bring card to front
                 cardPos -= (Vector3.Cross(c2 - c1, c3 - c1)).normalized * cardDepth;
@@ -503,7 +550,7 @@ public class SelectionManager : MonoBehaviour
         {
             Card card = hand[dragged];
             if (mouseButton && !mouseInsideHand)
-            { //  && sqrDistance > 2.1f
+            {
               //if (cardPos.y > transform.position.y + 0.5) {
               // Card is outside of the hand, so is considered "held" ready to be used
               // Remove from hand, so that cards in hand fill the hole that the card left
@@ -544,9 +591,8 @@ public class SelectionManager : MonoBehaviour
             cardTransform.rotation = Quaternion.RotateTowards(cardTransform.rotation, Quaternion.LookRotation(cardForward, cardUp), 80f * Time.deltaTime);
             cardTransform.position = cardPos;
 
-            //if (!canSelectCards || cardTransform.position.y <= transform.position.y + 0.5f) {
             if (!canSelectCards || mouseInsideHand)
-            { //  || sqrDistance <= 2
+            {
               // Card has gone back into hand
                 AddCardToHand(heldCard, selected);
                 dragged = selected;
@@ -597,7 +643,11 @@ public class SelectionManager : MonoBehaviour
     public static Vector3 GetCurveNormal(Vector3 a, Vector3 b, Vector3 c, float t)
     {
         Vector3 tangent = GetCurveTangent(a, b, c, t);
-        return Vector3.Cross(tangent, Vector3.forward);
+        Vector3 untwistedNormal = Vector3.Cross(tangent, Vector3.forward);
+
+        Plane curvePlane = new Plane(a, b, c);
+        float rotAngle = 90 - Vector3.Angle(curvePlane.normal, Vector3.up);
+        return Quaternion.AngleAxis(rotAngle, tangent) * untwistedNormal; // Twist the normal to always bow outward
     }
 
     /// <summary>

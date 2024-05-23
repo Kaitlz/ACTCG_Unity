@@ -16,12 +16,12 @@ public class CardSpawner : MonoBehaviour
     public CardDataSO[] opponentHand;
     public CardDataSO[] opponentDeck;
 
-    CardManager manager; // TODO: do we need this?
+    SelectionManager manager; // TODO: do we need this?
     GameObject zones = null;
 
     private void Awake()
     {
-        manager = gameObject.GetComponent<CardManager>();
+        manager = gameObject.GetComponent<SelectionManager>();
         zones = GameObject.Find("Zones");
     }
 
@@ -289,6 +289,20 @@ public class CardSpawner : MonoBehaviour
         return cardGroup; 
     }
 
+    Card[] SpawnHand(CardDataSO[] handData)
+    {
+        Card[] hand = new Card[handData.Length];
+
+        for (int i = 0; i < handData.Length; i++)
+        {
+            hand[i] = SpawnCard(handData[i], transform);// cardLocations[i]);
+        }
+
+        manager.BasicallyStart(hand);
+
+        return hand;
+    }
+
     public void SpawnCards(Board board)
     {
         // TODO: basically make a clone of zones and spawn cards in an organized hierarchy
@@ -310,6 +324,11 @@ public class CardSpawner : MonoBehaviour
 
             index = 0;
 
+            // TODO: change this later!
+            // Spawn hand
+            SpawnHand(playerHand);
+            
+            /*
             Transform[] zonePlayerHand = new Transform[board.player.hand.Length];
             foreach (Transform zph in zones.transform.Find("Player/Hand"))
             {
@@ -319,6 +338,7 @@ public class CardSpawner : MonoBehaviour
             board.player.hand = SpawnCardGroup(playerHand, zonePlayerHand);
 
             index = 0;
+            */
 
             Transform[] zonePlayerDeck = new Transform[board.player.deck.Length];
             foreach (Transform zpd in zones.transform.Find("Player/Deck"))
