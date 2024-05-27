@@ -506,15 +506,15 @@ MonoBehaviour:
   selectableTag: Card
   lookAtIntensity: 1
   moveSpeed: 250
-  h1: {x: 0.25, y: 0}
-  h2: {x: 0.25, y: 0.4}
-  h3: {x: 0.75, y: 0.4}
-  h4: {x: 0.75, y: 0}
+  h1: {x: 0.3, y: 0}
+  h2: {x: 0.3, y: 0.35}
+  h3: {x: 0.7, y: 0.35}
+  h4: {x: 0.7, y: 0}
   hDist: 30
   m_camera: {fileID: 1633238014}
   cardOffsetTowardsCamera: 10
   handHoverOffset: 3.25
-  cardRotationIntensity: 2
+  cardRotationIntensity: 5
   cardMaxRotation: 5
   cardRotationDamping: 5
   canUseCards: 1
@@ -522,12 +522,10 @@ MonoBehaviour:
   cardUprightWhenSelected: 1
   cardTilt: 1
   selectionSpacing: 1
-  curveStart: {x: 4.5, y: 13.5, z: 40}
-  curveMiddle: {x: -3.75, y: 17.1, z: 30}
-  curveEnd: {x: -12, y: 13.5, z: 40}
+  curveStart: {x: 7.5, y: 13.5, z: 39}
+  curveMiddle: {x: -3.75, y: 14, z: 32}
+  curveEnd: {x: -15, y: 14.5, z: 39}
   cardDepth: 1
-  handOffset: {x: 0, y: 0}
-  handSize: {x: 16.5, y: 10}
 --- !u!114 &289177116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6349,8 +6347,6 @@ MonoBehaviour:
   curveMiddle: {x: -3.75, y: 15, z: 30}
   curveEnd: {x: -12, y: 13.5, z: 40}
   cardDepth: 1
-  handOffset: {x: 0, y: -0.3}
-  handSize: {x: 9, y: 1.7}
 --- !u!4 &1724951904
 Transform:
   m_ObjectHideFlags: 0

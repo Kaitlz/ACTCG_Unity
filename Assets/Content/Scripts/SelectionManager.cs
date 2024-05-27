@@ -120,14 +120,6 @@ public class SelectionManager : MonoBehaviour
     [Tooltip("Controls the distance between the front and back of each consecutive card the hand.")]
     private float cardDepth = 1f;
 
-    // TODO: I think I can delete this stuff now that I have my own hand plane in 3D
-    [SerializeField]
-    [Tooltip("Controls the area which is considered 'in-hand', allowing cards to be selected/reordered. " +
-        "If a card leaves this area it can be used upon releasing the mouse button. " +
-        "Recommend having the hand bounds go past the screen edges to prevent accidental use when reordering cards quickly")]
-    private Vector2 handOffset = new Vector2(0, -0.3f), handSize = new Vector2(9, 1.7f);
-
-
     private Plane plane; // world XY plane, used for mouse position raycasts
     private Vector3 a, b, c; // Used for shaping hand into curve
 
@@ -145,7 +137,6 @@ public class SelectionManager : MonoBehaviour
     private Vector2 prevMousePos;
     private Vector2 mousePosDelta;
 
-    private Rect handBounds;
     private bool mouseInsideHand;
 
     private bool showDebugGizmos = true;
@@ -170,7 +161,6 @@ public class SelectionManager : MonoBehaviour
         a = curveStart;
         b = curveMiddle;
         c = curveEnd;
-        handBounds = new Rect((handOffset - handSize / 2), handSize);
 
         c1 = m_camera.ViewportToWorldPoint(new Vector3(h1.x, h1.y, hDist));
         c2 = m_camera.ViewportToWorldPoint(new Vector3(h2.x, h2.y, hDist));
@@ -346,7 +336,7 @@ public class SelectionManager : MonoBehaviour
             // TODO: expose?
             float tiltStrength = 3f;
             float tiltDrag = 3f;
-            float tiltSpeed = 50f;
+            float tiltSpeed = 150f;
 
             force += (mousePosDelta * tiltStrength - heldCardTilt) * Time.deltaTime;
             force *= 1 - tiltDrag * Time.deltaTime;
@@ -484,7 +474,10 @@ public class SelectionManager : MonoBehaviour
                 {
                     dragged = i;
                     heldCardOffset = cardTransform.position - mouseWorldPos;
-                    heldCardOffset.z = -0.1f;
+                    heldCardOffset.z = -0.1f; // TODO: fix this??
+
+                    // Enable selection highlight
+                    SetHighlight(hand[dragged], true);
                 }
             }
 
@@ -498,22 +491,40 @@ public class SelectionManager : MonoBehaviour
             else
             {
                 // TODO: fix hardcoded values
-                cardPos = Vector3.MoveTowards(cardTransform.position, cardPos, 6f * Time.deltaTime);
+                cardPos = Vector3.MoveTowards(cardTransform.position, cardPos, 40f * Time.deltaTime);
                 cardTransform.position = cardPos;
             }
 
             // Get Selected Card
-            if (canSelectCards)
+            if (canSelectCards) // TODO: why doesn't checking mouseInsideHand work here?
             {
                 //float d = (p - mouseWorldPos).sqrMagnitude;
                 if (d < sqrDistance)
                 {
+                    // Check if we already had a previous card selected first
+                    if (selected > -1 && selected < hand.Count)
+                    {
+                        // Disable selection highlight on previous card
+                        SetHighlight(hand[selected], false);
+                    }
+
                     sqrDistance = d;
                     selected = i;
+
+                    Cursor.visible = true;
+
+                    // Enable selection highlight
+                    SetHighlight(hand[selected], true);
                 }
             }
             else
             {
+                if (selected > -1 && selected < hand.Count)
+                {
+                    // Disable selection highlight
+                    SetHighlight(hand[selected], false);
+                }
+
                 selected = -1;
                 dragged = -1;
             }
@@ -541,6 +552,8 @@ public class SelectionManager : MonoBehaviour
 
         if (!mouseButton)
         {
+            Cursor.visible = true;
+
             // Stop dragging
             heldCardOffset = Vector3.zero;
             dragged = -1;
@@ -551,18 +564,24 @@ public class SelectionManager : MonoBehaviour
             Card card = hand[dragged];
             if (mouseButton && !mouseInsideHand)
             {
-              //if (cardPos.y > transform.position.y + 0.5) {
-              // Card is outside of the hand, so is considered "held" ready to be used
-              // Remove from hand, so that cards in hand fill the hole that the card left
+                //if (cardPos.y > transform.position.y + 0.5) {
+                // Card is outside of the hand, so is considered "held" ready to be used
+                // Remove from hand, so that cards in hand fill the hole that the card left
                 heldCard = card;
                 RemoveCardFromHand(dragged);
                 count--;
                 dragged = -1;
+                
+                Cursor.visible = false;
+
+                SetHighlight(heldCard, true);
             }
         }
 
         if (heldCard == null && mouseButton && dragged != -1 && selected != -1 && dragged != selected)
         {
+            Cursor.visible = false;
+
             // Move dragged card
             MoveCardToIndex(dragged, selected);
             dragged = selected;
@@ -575,6 +594,8 @@ public class SelectionManager : MonoBehaviour
 
         if (heldCard != null)
         {
+            Cursor.visible = false;
+
             Transform cardTransform = heldCard.transform;
             Vector3 cardUp = Vector3.up;
             Vector3 cardPos = mouseWorldPos + heldCardOffset;
@@ -584,20 +605,37 @@ public class SelectionManager : MonoBehaviour
                 cardForward -= new Vector3(heldCardTilt.x, heldCardTilt.y, 0);
             }
 
+            // TODO: bring card towards camera instead
             // Bring card to front
-            cardPos.z = transform.position.z - 0.2f;
+            //cardPos.z = transform.position.z - 0.2f;
 
             // Handle Position & Rotation
-            cardTransform.rotation = Quaternion.RotateTowards(cardTransform.rotation, Quaternion.LookRotation(cardForward, cardUp), 80f * Time.deltaTime);
+            // TODO: this is taken from my old code
+            //clickSelection.position = Vector3.MoveTowards(clickSelection.position, hit.point, Time.deltaTime * moveSpeed);
+
+            Vector3 velocity = (cardPos - lastPosition) / Time.deltaTime;
+            Vector3 adjustedVelocity = Vector3.ClampMagnitude(new Vector3(velocity.z, 0, -velocity.x), cardMaxRotation);
+            Quaternion desiredRotation = Quaternion.Euler(adjustedVelocity * cardRotationIntensity);
+            cardTransform.rotation = Quaternion.Slerp(cardTransform.rotation, desiredRotation, Time.deltaTime * cardRotationDamping);
+            
+            //cardTransform.rotation = Quaternion.RotateTowards(cardTransform.rotation, Quaternion.LookRotation(cardForward, cardUp), 80f * Time.deltaTime);
             cardTransform.position = cardPos;
+
+            lastPosition = cardPos;
 
             if (!canSelectCards || mouseInsideHand)
             {
-              // Card has gone back into hand
+                Cursor.visible = true;
+
+                // Disable selection highlight
+                SetHighlight(heldCard, false);
+
+                // Card has gone back into hand
                 AddCardToHand(heldCard, selected);
                 dragged = selected;
                 selected = -1;
                 heldCard = null;
+
                 return;
             }
 
@@ -611,10 +649,30 @@ public class SelectionManager : MonoBehaviour
                 }
                 else
                 {
-                    // Cannot use card / Not enough mana! Return card to hand!
+                    // Cannot use card! Return card to hand!
                     AddCardToHand(heldCard, selected);
                 }
+
+                Cursor.visible = true;
+
+                SetHighlight(heldCard, false);
+
                 heldCard = null;
+            }
+        }
+    }
+
+    // TODO: some reference to this is highlighting cards in hand even while holding another card
+    // Enables or disables the highlight around a card
+    public static void SetHighlight(Card card, bool isEnabled)
+    {
+        Transform highlight = card.transform.Find("Highlight");
+        if (highlight != null)
+        {
+            MeshRenderer renderer = highlight.GetComponent<MeshRenderer>();
+            if (renderer != null)
+            {
+                renderer.enabled = isEnabled;
             }
         }
     }
